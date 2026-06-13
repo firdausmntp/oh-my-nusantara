@@ -106,6 +106,9 @@
     "hashline_edit": {
       "type": "boolean"
     },
+    "subagent_same_model": {
+      "type": "boolean"
+    },
     "model_fallback": {
       "type": "boolean"
     },
