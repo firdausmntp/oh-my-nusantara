@@ -173,11 +173,28 @@ function main() {
     .filter((entry) => entry !== null);
 
   if (resolvedBinaries.length === 0) {
-    console.error(`\noh-my-opencode: Platform binary not installed.`);
+    // No platform binary found - fall back to Node.js CLI entrypoint
+    const cliPath = fileURLToPath(new URL("../dist/cli/index.js", import.meta.url));
+    if (existsSync(cliPath)) {
+      const childEnv = {
+        ...process.env,
+        OMO_INVOCATION_NAME: invocationName,
+        OMO_WRAPPER_PACKAGE_ROOT: getWrapperPackageRoot(),
+      };
+      const result = spawnSync(process.execPath, [cliPath, ...process.argv.slice(2)], {
+        stdio: "inherit",
+        env: childEnv,
+      });
+      if (result.signal) {
+        process.exit(getSignalExitCode(result.signal));
+      }
+      process.exit(result.status ?? 0);
+    }
+
+    console.error(`\noh-my-nusantara: Neither platform binary nor CLI entrypoint found.`);
     console.error(`\nYour platform: ${platform}-${arch}${libcFamily === "musl" ? "-musl" : ""}`);
-    console.error(`Expected packages (in order): ${packageCandidates.join(", ")}`);
-    console.error(`\nTo fix, run:`);
-    console.error(`  npm install ${packageCandidates[0]}\n`);
+    console.error(`Tried platform packages: ${packageCandidates.join(", ")}`);
+    console.error(`Tried CLI fallback: ${cliPath}\n`);
     process.exit(1);
   }
 
