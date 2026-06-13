@@ -2,8 +2,7 @@
 // Shared platform detection module - used by wrapper and postinstall
 
 const PLATFORM_PACKAGE_BASE_BY_WRAPPER_NAME = {
-  lazycodex: "oh-my-openagent",
-  "lazycodex-ai": "oh-my-openagent",
+  "oh-my-sarna": "oh-my-nusantara",
 };
 
 export function getPackageBareName(packageName) {
