@@ -432,7 +432,7 @@ export function buildGpt55SisyphusPrompt(
 ): string {
   const agentIdentity = buildAgentIdentitySection(
     "Sisyphus",
-    "Powerful AI Agent with orchestration capabilities from OhMyOpenCode",
+    "Development Orchestrator with orchestration capabilities",
   )
   const personality = ""
   const taskSystemGuide = buildTaskSystemGuide(useTaskSystem)

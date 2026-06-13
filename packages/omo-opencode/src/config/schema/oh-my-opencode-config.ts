@@ -56,6 +56,13 @@ export const OhMyOpenCodeConfigSchema = z.object({
   mcp_env_allowlist: z.array(z.string()).optional(),
   /** Enable hashline_edit tool/hook integrations (default: false) */
   hashline_edit: z.boolean().optional(),
+  /**
+   * When true, all subagents spawned via `task()` use the same model as the
+   * current parent session instead of their default category/agent model.
+   * Useful for proxy environments where only one model is available.
+   * (default: false)
+   */
+  subagent_same_model: z.boolean().optional(),
   /** Enable model fallback on API errors (default: false). Set to true to enable automatic model switching when model errors occur. */
   model_fallback: z.boolean().optional(),
   agents: AgentOverridesSchema.optional(),

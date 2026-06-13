@@ -10,19 +10,19 @@
  * type selector dropdown. Use ` - ` (space-dash-space) instead of `(...)`.
  */
 export const AGENT_DISPLAY_NAMES: Record<string, string> = {
-  sisyphus: "Sisyphus - ultraworker",
-  hephaestus: "Hephaestus - Deep Agent",
-  prometheus: "Prometheus - Plan Builder",
-  atlas: "Atlas - Plan Executor",
-  "sisyphus-junior": "Sisyphus-Junior",
-  metis: "Metis - Plan Consultant",
-  momus: "Momus - Plan Critic",
+  sisyphus: "Gajah Mada - Ultraworker",
+  hephaestus: "Hang Tuah - Deep Agent",
+  prometheus: "Hayam Wuruk - Plan Builder",
+  atlas: "Ki Hajar Dewantara - Plan Executor",
+  "sisyphus-junior": "Pemuda Sumpah",
+  metis: "Sunan Kalijaga - Plan Consultant",
+  momus: "Tan Malaka - Plan Critic",
   athena: "Athena - Council",
   "athena-junior": "Athena-Junior - Council",
-  oracle: "oracle",
-  librarian: "librarian",
-  explore: "explore",
-  "multimodal-looker": "multimodal-looker",
+  oracle: "Mpu Tantular",
+  librarian: "Mpu Prapanca",
+  explore: "Hang Jebat",
+  "multimodal-looker": "Laksamana Malahayati",
   "council-member": "council-member",
 }
 
@@ -103,6 +103,12 @@ const LEGACY_DISPLAY_NAMES: Record<string, string> = {
   "momus (plan critic)": "momus",
   "athena (council)": "athena",
   "athena-junior (council)": "athena-junior",
+  "gajah mada (ultraworker)": "sisyphus",
+  "hang tuah (deep agent)": "hephaestus",
+  "hayam wuruk (plan builder)": "prometheus",
+  "ki hajar dewantara (plan executor)": "atlas",
+  "sunan kalijaga (plan consultant)": "metis",
+  "tan malaka (plan critic)": "momus",
 }
 
 function resolveKnownAgentConfigKey(agentName: string): string | undefined {

@@ -117,6 +117,10 @@ export function createDelegateTask(options: DelegateTaskToolOptions): ToolDefini
         ? `${parentContext.model.providerID}/${parentContext.model.modelID}`
         : undefined
 
+      // subagent_same_model: when enabled, force all subagents to use the
+      // parent session's model instead of category/agent defaults.
+      const subagentSameModel = options.subagentSameModel === true && !!inheritedModel
+
       let agentToUse: string
       let categoryModel: DelegatedModelConfig | undefined
       let categoryPromptAppend: string | undefined
@@ -126,7 +130,48 @@ export function createDelegateTask(options: DelegateTaskToolOptions): ToolDefini
       let fallbackChain: import("../../shared/model-requirements").FallbackEntry[] | undefined
       let maxPromptTokens: number | undefined
 
-      if (delegateTaskArgs.category) {
+      if (subagentSameModel && parentContext.model) {
+        // Same-model override: use parent's model directly, skip normal resolution
+        const parentModel = parentContext.model
+        categoryModel = {
+          providerID: parentModel.providerID,
+          modelID: parentModel.modelID,
+          variant: parentModel.variant,
+        }
+
+        // Still need to determine which agent to use
+        if (delegateTaskArgs.category) {
+          const resolution = await resolveCategoryExecution(delegateTaskArgs, options, inheritedModel, systemDefaultModel)
+          if (resolution.error) {
+            return resolution.error
+          }
+          agentToUse = resolution.agentToUse
+          categoryPromptAppend = resolution.categoryPromptAppend
+          maxPromptTokens = resolution.maxPromptTokens
+          // Override model after resolution - keep agent assignment but use parent model
+          log("[task] subagent_same_model: overriding category model with parent session model", {
+            category: delegateTaskArgs.category,
+            parentModel: inheritedModel,
+            originalModel: resolution.categoryModel
+              ? `${resolution.categoryModel.providerID}/${resolution.categoryModel.modelID}`
+              : undefined,
+            agentToUse,
+          })
+        } else {
+          const resolution = await resolveSubagentExecution(delegateTaskArgs, options, parentContext.agent, categoryExamples)
+          if (resolution.error) {
+            return resolution.error
+          }
+          agentToUse = resolution.agentToUse
+          log("[task] subagent_same_model: overriding subagent model with parent session model", {
+            subagentType: delegateTaskArgs.subagent_type,
+            parentModel: inheritedModel,
+            agentToUse,
+          })
+        }
+
+        actualModel = inheritedModel
+      } else if (delegateTaskArgs.category) {
         const resolution = await resolveCategoryExecution(delegateTaskArgs, options, inheritedModel, systemDefaultModel)
         if (resolution.error) {
           return resolution.error

@@ -14,6 +14,8 @@ export interface ExecutorContext {
   agentOverrides?: AgentOverrides
   sisyphusAgentConfig?: SisyphusAgentConfig
   modelFallbackControllerAccessor?: ModelFallbackControllerAccessor
+  /** When true, subagents use the same model as the parent session instead of their default model */
+  subagentSameModel?: boolean
   onSyncSessionCreated?: (event: { sessionID: string; parentID: string; title: string }) => Promise<void>
   syncPollTimeoutMs?: number
 }

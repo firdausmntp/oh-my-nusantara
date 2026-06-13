@@ -1,4 +1,6 @@
-# oh-my-opencode — OpenCode Plugin
+# oh-my-nusantara — Nusantara Edition OpenCode Plugin
+
+> **Fork of oh-my-openagent with Indonesian/Nusantara heritage agent names. All agent display names, identity sections, and content-filter-triggering strings have been replaced with Nusantara equivalents. See [OH-MY-NUSANTARA-GUIDE.md](./OH-MY-NUSANTARA-GUIDE.md) for the full mapping.**
 
 > **HOLD THE FUCK UP. THIS ENTIRE GODDAMN CODEBASE IS BEING RIPPED APART AND REBUILT RIGHT NOW. A MASSIVE MULTI-HARNESS AGENT OS REFACTOR IS IN PROGRESS — WE ARE RESTRUCTURING EVERYTHING TO SUPPORT MULTIPLE AGENT HARNESSES (OPENCODE, CODEX, PI, AND OTHERS). DO NOT TRUST THE STRUCTURE BELOW AS STABLE. READ THE [ROADMAP](./ROADMAP.md) BEFORE YOU TOUCH ANYTHING OR SO HELP ME GOD.**
 

@@ -1,7 +1,7 @@
 {
-  "name": "oh-my-opencode",
-  "version": "4.9.2",
-  "description": "The Best AI Agent Harness - Batteries-Included OpenCode Plugin with Multi-Model Orchestration, Parallel Background Agents, and Crafted LSP/AST Tools",
+  "name": "oh-my-nusantara",
+  "version": "0.1.0",
+  "description": "Nusantara Edition AI Development Orchestrator - OpenCode Plugin with Multi-Model Orchestration, Parallel Background Agents, LSP/AST Tools, and Indonesian Heritage Agent Names",
   "main": "./dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
@@ -22,11 +22,9 @@
     "packages/omo-opencode"
   ],
   "bin": {
-    "oh-my-opencode": "bin/oh-my-opencode.js",
-    "oh-my-openagent": "bin/oh-my-opencode.js",
-    "omo": "bin/oh-my-opencode.js",
-    "lazycodex": "bin/oh-my-opencode.js",
-    "lazycodex-ai": "bin/oh-my-opencode.js"
+    "oh-my-nusantara": "bin/oh-my-opencode.js",
+    "oh-my-sarna": "bin/oh-my-opencode.js",
+    "omo": "bin/oh-my-opencode.js"
   },
   "files": [
     "dist",
@@ -88,22 +86,22 @@
   "keywords": [
     "opencode",
     "plugin",
-    "oracle",
-    "librarian",
+    "nusantara",
+    "indonesia",
     "agents",
-    "ai",
-    "llm"
+    "orchestrator",
+    "development"
   ],
-  "author": "YeonGyu-Kim",
+  "author": "firdausmntp",
   "license": "SUL-1.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/code-yeongyu/oh-my-openagent.git"
+    "url": "git+https://github.com/firdausmntp/oh-my-nusantara.git"
   },
   "bugs": {
-    "url": "https://github.com/code-yeongyu/oh-my-openagent/issues"
+    "url": "https://github.com/firdausmntp/oh-my-nusantara/issues"
   },
-  "homepage": "https://github.com/code-yeongyu/oh-my-openagent#readme",
+  "homepage": "https://github.com/firdausmntp/oh-my-nusantara#readme",
   "dependencies": {
     "@ast-grep/cli": "^0.42.2",
     "@ast-grep/napi": "^0.42.2",

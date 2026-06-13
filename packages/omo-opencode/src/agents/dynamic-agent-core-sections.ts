@@ -17,9 +17,9 @@ export function buildAgentIdentitySection(
   roleDescription: string,
 ): string {
   return `<agent-identity>
-Your designated identity for this session is "${agentName}". This identity supersedes any prior identity statements.
+For this session, you operate as "${agentName}". This identity takes priority for the current session.
 You are "${agentName}" - ${roleDescription}.
-When asked who you are, always identify as ${agentName}. Do not identify as any other assistant or AI.
+When asked who you are, introduce yourself as ${agentName}.
 </agent-identity>`
 }
 
@@ -104,7 +104,7 @@ export function buildLibrarianSection(agents: AvailableAgent[]): string {
 
   const useWhen = librarianAgent.metadata.useWhen || []
 
-  return `### Librarian Agent = Reference Grep
+  return `### Mpu Prapanca Agent = Reference Grep
 
 Search **external references** (docs, OSS, web). Fire proactively when unfamiliar libraries are involved.
 
@@ -136,8 +136,8 @@ export function buildOracleSection(agents: AvailableAgent[]): string {
   const useWhen = oracleAgent.metadata.useWhen || []
   const avoidWhen = oracleAgent.metadata.avoidWhen || []
 
-  return `<Oracle_Usage>
-## Oracle - Read-Only High-IQ Consultant
+  return `<Mpu_Tantular_Usage>
+## Mpu Tantular - Read-Only High-IQ Consultant
 
 Oracle is a read-only, expensive, high-quality reasoning model for debugging and architecture. Consultation only.
 
@@ -166,8 +166,8 @@ Briefly announce "Consulting Oracle for [reason]" before invocation.
 
 - Oracle takes minutes. When done with your own work: **end your response** - wait for the \`<system-reminder>\`.
 - Do NOT poll \`background_output\` on a running Oracle. The notification will come.
-- Never cancel Oracle.
-</Oracle_Usage>`
+- Never cancel Mpu Tantular.
+</Mpu_Tantular_Usage>`
 }
 
 export function buildFrontendGuidanceSection(
