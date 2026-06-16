@@ -6,7 +6,7 @@ import { removeLegacyCodexComponentBins } from "./codex-cache-legacy-bins"
 
 type LinkPlatform = NodeJS.Platform
 
-const RESERVED_NESTED_BIN_NAMES = new Set(["omo", "lazycodex", "lazycodex-ai", "oh-my-opencode", "oh-my-openagent"])
+const RESERVED_NESTED_BIN_NAMES = new Set(["omo", "lazycodex", "lazycodex-ai", "oh-my-opencode", "oh-my-openagent", "oh-my-nusantara"])
 const RUNTIME_WRAPPER_MARKER = "OMO_GENERATED_RUNTIME_WRAPPER"
 
 export async function linkCachedPluginBins(input: {

@@ -6,7 +6,7 @@ import { AGENT_MODEL_REQUIREMENTS } from "./model-requirements"
 describe("Agent Config Integration", () => {
   describe("Old format config migration", () => {
     test("migrates old format agent keys to lowercase", () => {
-      // given - config with old format keys
+      // given - config with old format keys (original oh-my-opencode names)
       const oldConfig = {
         Sisyphus: { model: "anthropic/claude-opus-4-7" },
         Atlas: { model: "anthropic/claude-opus-4-7" },
@@ -91,17 +91,17 @@ describe("Agent Config Integration", () => {
       // when - display names are requested
       const displayNames = agents.map((agent) => getAgentDisplayName(agent))
 
-      // then - display names are correct
-      expect(displayNames).toContain("Sisyphus - ultraworker")
-      expect(displayNames).toContain("Hephaestus - Deep Agent")
-      expect(displayNames).toContain("Prometheus - Plan Builder")
-      expect(displayNames).toContain("Atlas - Plan Executor")
-      expect(displayNames).toContain("Metis - Plan Consultant")
-      expect(displayNames).toContain("Momus - Plan Critic")
-      expect(displayNames).toContain("oracle")
-      expect(displayNames).toContain("librarian")
-      expect(displayNames).toContain("explore")
-      expect(displayNames).toContain("multimodal-looker")
+      // then - display names are correct (Nusantara names)
+      expect(displayNames).toContain("Gajah Mada - Ultraworker")
+      expect(displayNames).toContain("Hang Tuah - Deep Agent")
+      expect(displayNames).toContain("Hayam Wuruk - Plan Builder")
+      expect(displayNames).toContain("Ki Hajar Dewantara - Plan Executor")
+      expect(displayNames).toContain("Sunan Kalijaga - Plan Consultant")
+      expect(displayNames).toContain("Tan Malaka - Plan Critic")
+      expect(displayNames).toContain("Mpu Tantular")
+      expect(displayNames).toContain("Mpu Prapanca")
+      expect(displayNames).toContain("Hang Jebat")
+      expect(displayNames).toContain("Laksamana Malahayati")
     })
 
     test("handles lowercase keys case-insensitively", () => {
@@ -111,13 +111,13 @@ describe("Agent Config Integration", () => {
       // when - display names are requested
       const displayNames = keys.map((key) => getAgentDisplayName(key))
 
-      // then - correct display names are returned
-      expect(displayNames[0]).toBe("Sisyphus - ultraworker")
-      expect(displayNames[1]).toBe("Atlas - Plan Executor")
-      expect(displayNames[2]).toBe("Sisyphus - ultraworker")
-      expect(displayNames[3]).toBe("Atlas - Plan Executor")
-      expect(displayNames[4]).toBe("Prometheus - Plan Builder")
-      expect(displayNames[5]).toBe("Prometheus - Plan Builder")
+      // then - correct display names are returned (Nusantara names)
+      expect(displayNames[0]).toBe("Gajah Mada - Ultraworker")
+      expect(displayNames[1]).toBe("Ki Hajar Dewantara - Plan Executor")
+      expect(displayNames[2]).toBe("Gajah Mada - Ultraworker")
+      expect(displayNames[3]).toBe("Ki Hajar Dewantara - Plan Executor")
+      expect(displayNames[4]).toBe("Hayam Wuruk - Plan Builder")
+      expect(displayNames[5]).toBe("Hayam Wuruk - Plan Builder")
     })
 
     test("returns original key for unknown agents", () => {
@@ -171,7 +171,7 @@ describe("Agent Config Integration", () => {
 
   describe("End-to-end config flow", () => {
     test("old config migrates and displays correctly", () => {
-      // given - old format config
+      // given - old format config (original oh-my-opencode names)
       const oldConfig = {
         Sisyphus: { model: "anthropic/claude-opus-4-7", temperature: 0.1 },
         "Prometheus - Plan Builder": { model: "anthropic/claude-opus-4-7" },
@@ -188,9 +188,9 @@ describe("Agent Config Integration", () => {
       const sisyphusDisplay = getAgentDisplayName("sisyphus")
       const prometheusDisplay = getAgentDisplayName("prometheus")
 
-      // then - display names are correct
-      expect(sisyphusDisplay).toBe("Sisyphus - ultraworker")
-      expect(prometheusDisplay).toBe("Prometheus - Plan Builder")
+      // then - display names are correct (Nusantara names)
+      expect(sisyphusDisplay).toBe("Gajah Mada - Ultraworker")
+      expect(prometheusDisplay).toBe("Hayam Wuruk - Plan Builder")
 
       // then - config values are preserved
       expect(result.migrated.sisyphus).toEqual({ model: "anthropic/claude-opus-4-7", temperature: 0.1 })
@@ -217,9 +217,9 @@ describe("Agent Config Integration", () => {
       const sisyphusDisplay = getAgentDisplayName("sisyphus")
       const atlasDisplay = getAgentDisplayName("atlas")
 
-      // then - display names are correct
-      expect(sisyphusDisplay).toBe("Sisyphus - ultraworker")
-      expect(atlasDisplay).toBe("Atlas - Plan Executor")
+      // then - display names are correct (Nusantara names)
+      expect(sisyphusDisplay).toBe("Gajah Mada - Ultraworker")
+      expect(atlasDisplay).toBe("Ki Hajar Dewantara - Plan Executor")
     })
   })
 })

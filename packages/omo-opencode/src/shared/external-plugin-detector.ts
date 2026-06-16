@@ -31,6 +31,7 @@ const KNOWN_SKILL_PLUGINS = [
 const OMO_PACKAGE_PLUGINS = [
   "oh-my-opencode",
   "oh-my-openagent",
+  "oh-my-nusantara",
   "@code-yeongyu/oh-my-opencode",
   "@code-yeongyu/oh-my-openagent",
 ]
@@ -54,13 +55,13 @@ function isOmoFilePlugin(entry: string): boolean {
   const normalized = entry.toLowerCase().replaceAll("\\", "/")
   if (!normalized.startsWith("file://")) return false
 
-  return /\/(omo(?:-[^/]*)?|oh-my-opencode|oh-my-openagent)\/(src|dist)\/index\.(ts|js)$/.test(normalized)
+  return /\/(omo(?:-[^/]*)?|oh-my-opencode|oh-my-openagent|oh-my-nusantara)\/(src|dist)\/index\.(ts|js)$/.test(normalized)
 }
 
 function matchesOmoPlugin(entry: string): string | null {
   const packageMatch = matchesKnownPlugin(entry, OMO_PACKAGE_PLUGINS)
   if (packageMatch) return packageMatch
-  if (isOmoFilePlugin(entry)) return "oh-my-openagent"
+  if (isOmoFilePlugin(entry)) return "oh-my-nusantara"
   return null
 }
 
@@ -140,13 +141,13 @@ export function detectDuplicateOmoPlugin(directory: string): DuplicateOmoPluginR
   const duplicatePlugins = plugins.filter((plugin) => matchesOmoPlugin(plugin) !== null)
 
   if (duplicatePlugins.length > 1) {
-    log("[oh-my-openagent] Duplicate OMO plugin entries detected", {
+    log("[oh-my-nusantara] Duplicate OMO plugin entries detected", {
       duplicatePlugins,
       allPlugins: plugins,
     })
     return {
       detected: true,
-      pluginName: "oh-my-openagent",
+      pluginName: "oh-my-nusantara",
       duplicatePlugins,
       allPlugins: plugins,
     }

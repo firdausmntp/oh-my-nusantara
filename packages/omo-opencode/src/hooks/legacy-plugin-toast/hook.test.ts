@@ -87,7 +87,7 @@ describe("createLegacyPluginToastHook", () => {
       mockAutoMigrate.mockReturnValue({
         migrated: true,
         from: "oh-my-opencode",
-        to: "oh-my-openagent",
+        to: "oh-my-nusantara",
         configPath: "/tmp/opencode.json",
       })
       const hook = createLegacyPluginToastHook(createMockCtx(), {
@@ -147,7 +147,7 @@ describe("createLegacyPluginToastHook", () => {
       mockAutoMigrate.mockReturnValue({
         migrated: true,
         from: "oh-my-opencode",
-        to: "oh-my-openagent",
+        to: "oh-my-nusantara",
         configPath: "/tmp/opencode.json",
       })
       const hook = createLegacyPluginToastHook(createMockCtx(), {

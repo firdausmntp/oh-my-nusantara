@@ -302,7 +302,7 @@ const metisRestrictions = createAgentToolRestrictions([
 export function createMetisAgent(model: string): AgentConfig {
   return {
     description:
-      "Pre-planning consultant that analyzes requests to identify hidden intentions, ambiguities, and AI failure points. (Metis - OhMyOpenCode)",
+      "Pre-planning consultant that analyzes requests to identify hidden intentions, ambiguities, and AI failure points. (Sunan Kalijaga - OhMyOpenCode)",
     mode: MODE,
     model,
     temperature: 0.3,
@@ -331,6 +331,6 @@ export const metisPromptMetadata: AgentPromptMetadata = {
     "Simple, well-defined tasks",
     "User has already provided detailed requirements",
   ],
-  promptAlias: "Metis",
+  promptAlias: "Sunan Kalijaga",
   keyTrigger: "Ambiguous or complex request → consult Metis before Prometheus",
 }

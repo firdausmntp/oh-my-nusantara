@@ -1,7 +1,7 @@
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs"
 import { basename, dirname, join } from "node:path"
 import type { ConfigMergeResult } from "../types"
-import { PLUGIN_NAME, LEGACY_PLUGIN_NAME } from "../../shared"
+import { PLUGIN_NAME, LEGACY_PLUGIN_NAME, OLDER_LEGACY_PLUGIN_NAME } from "../../shared"
 import { backupConfigFile } from "./backup-config"
 import { getConfigDir } from "./config-context"
 import { ensureConfigDirectoryExists } from "./ensure-config-directory-exists"
@@ -72,12 +72,13 @@ function isSourceOmoPluginEntry(plugin: string): boolean {
   const normalized = plugin.toLowerCase().replaceAll("\\", "/")
   if (!normalized.startsWith("file://")) return false
 
-  return /\/(omo(?:-[^/]*)?|oh-my-opencode|oh-my-openagent)\/(src|dist)\/index\.(ts|js)$/.test(normalized)
+  return /\/(omo(?:-[^/]*)?|oh-my-opencode|oh-my-openagent|oh-my-nusantara)\/(src|dist)\/index\.(ts|js)$/.test(normalized)
 }
 
 function isPackageOmoPluginEntry(plugin: string): boolean {
   return plugin === PLUGIN_NAME || plugin.startsWith(`${PLUGIN_NAME}@`) ||
-    plugin === LEGACY_PLUGIN_NAME || plugin.startsWith(`${LEGACY_PLUGIN_NAME}@`)
+    plugin === LEGACY_PLUGIN_NAME || plugin.startsWith(`${LEGACY_PLUGIN_NAME}@`) ||
+    plugin === OLDER_LEGACY_PLUGIN_NAME || plugin.startsWith(`${OLDER_LEGACY_PLUGIN_NAME}@`)
 }
 
 function isOurPlugin(plugin: string): boolean {

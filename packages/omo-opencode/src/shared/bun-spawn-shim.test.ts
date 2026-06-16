@@ -71,7 +71,8 @@ describe("bun-spawn-shim", () => {
     expect(result.pid).toBeGreaterThan(0)
   })
 
-  test("#given default stdio #when child reads stdin #then it does not hang waiting for input", async () => {
+  // Skip on Windows: cat is a Unix-only command
+  test.skipIf(process.platform === "win32")("#given default stdio #when child reads stdin #then it does not hang waiting for input", async () => {
     const proc = spawn(["cat"], { stdout: "pipe", stderr: "pipe" })
 
     const exitCode = await proc.exited

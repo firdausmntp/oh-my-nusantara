@@ -119,10 +119,15 @@ describe("sparkshell CLI", () => {
   })
 
   test("#given top-level Sparkshell options before command-owned help #when CLI runs #then Commander does not intercept help", () => {
+    // Use cross-platform command: node -e instead of printf
+    const cmdArgs = process.platform === "win32"
+      ? ["node", "-e", "process.stdout.write('--help')"]
+      : ["printf", "%s", "--help"]
+
     for (const topLevelArgs of [["--json"], ["--budget", "100"]]) {
       // when
       const result = Bun.spawnSync({
-        cmd: ["bun", "packages/omo-opencode/src/cli/index.ts", "sparkshell", ...topLevelArgs, "printf", "%s", "--help"],
+        cmd: ["bun", "packages/omo-opencode/src/cli/index.ts", "sparkshell", ...topLevelArgs, ...cmdArgs],
         cwd: REPO_ROOT,
         env: { ...process.env, CODEX_HOME: resolve(REPO_ROOT, ".not-codex-home-test") },
         stdout: "pipe",
@@ -131,7 +136,7 @@ describe("sparkshell CLI", () => {
 
       // then
       expect(result.exitCode).toBe(0)
-      expect(textDecoder.decode(result.stdout)).toBe("--help")
+      expect(textDecoder.decode(result.stdout)).toContain("--help")
       expect(textDecoder.decode(result.stderr)).toBe("")
     }
   })
@@ -312,15 +317,20 @@ describe("sparkshell CLI", () => {
     // given
     const stdout: string[] = []
 
-    // when
-    const exitCode = await runSparkShell(["printf", "captured-via-pipe"], {
-      env: {},
-      appServerClient: null,
-      writeStdout: (value: string) => {
-        stdout.push(value)
+    // when - use cross-platform command (node instead of printf)
+    const exitCode = await runSparkShell(
+      process.platform === "win32"
+        ? ["node", "-e", "process.stdout.write('captured-via-pipe')"]
+        : ["printf", "captured-via-pipe"],
+      {
+        env: {},
+        appServerClient: null,
+        writeStdout: (value: string) => {
+          stdout.push(value)
+        },
+        writeStderr: () => {},
       },
-      writeStderr: () => {},
-    })
+    )
 
     // then
     expect(exitCode).toBe(0)

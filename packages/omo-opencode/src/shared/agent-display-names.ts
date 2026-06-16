@@ -9,6 +9,17 @@
  * header validation failures that prevent agents from appearing in the UI
  * type selector dropdown. Use ` - ` (space-dash-space) instead of `(...)`.
  */
+/**
+ * Agent display name mappings for oh-my-opencode.
+ *
+ * This file was modified as part of the Nusantara agent naming rebrand:
+ * - Fork: oh-my-nusantara
+ * - Original: oh-my-opencode
+ * - Change: Replaced Greek mythology agent names (Sisyphus, Hephaestus, etc.)
+ *   with Nusantara cultural references (Gajah Mada, Hang Tuah, etc.)
+ * - Date: 2026-06-15
+ */
+
 export const AGENT_DISPLAY_NAMES: Record<string, string> = {
   sisyphus: "Gajah Mada - Ultraworker",
   hephaestus: "Hang Tuah - Deep Agent",
@@ -95,6 +106,16 @@ const REVERSE_DISPLAY_NAMES: Record<string, string> = Object.fromEntries(
 // Legacy parenthesized display names for backward compatibility.
 // Old configs/sessions may reference these names; resolve them to config keys.
 const LEGACY_DISPLAY_NAMES: Record<string, string> = {
+  // Dash-separated old English names (pre-Nusantara format)
+  "sisyphus - ultraworker": "sisyphus",
+  "hephaestus - deep agent": "hephaestus",
+  "prometheus - plan builder": "prometheus",
+  "atlas - plan executor": "atlas",
+  "metis - plan consultant": "metis",
+  "momus - plan critic": "momus",
+  "athena - council": "athena",
+  "athena-junior - council": "athena-junior",
+  // Parenthesized old English names
   "sisyphus (ultraworker)": "sisyphus",
   "hephaestus (deep agent)": "hephaestus",
   "prometheus (plan builder)": "prometheus",
@@ -103,6 +124,7 @@ const LEGACY_DISPLAY_NAMES: Record<string, string> = {
   "momus (plan critic)": "momus",
   "athena (council)": "athena",
   "athena-junior (council)": "athena-junior",
+  // Parenthesized Nusantara names
   "gajah mada (ultraworker)": "sisyphus",
   "hang tuah (deep agent)": "hephaestus",
   "hayam wuruk (plan builder)": "prometheus",

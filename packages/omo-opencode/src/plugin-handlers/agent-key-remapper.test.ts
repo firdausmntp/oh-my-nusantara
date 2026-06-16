@@ -15,7 +15,8 @@ describe("remapAgentKeysToDisplayNames", () => {
 
     // then known agents get display name keys only
     expect(result[getAgentListDisplayName("sisyphus")]).toBeDefined()
-    expect(result["oracle"]).toBeDefined()
+    expect(result[getAgentListDisplayName("oracle")]).toBeDefined()
+    expect(result["oracle"]).toBeUndefined()
     expect(result["sisyphus"]).toBeUndefined()
   })
 
@@ -143,7 +144,11 @@ describe("remapAgentKeysToDisplayNames", () => {
       prompt: "test",
       mode: "primary",
     })
-    expect(result.oracle).toEqual({ name: "oracle", prompt: "test", mode: "subagent" })
+    expect(result[getAgentListDisplayName("oracle")]).toEqual({
+      name: getAgentListDisplayName("oracle"),
+      prompt: "test",
+      mode: "subagent",
+    })
   })
 
   it("backfills runtime names for core agents when builtin configs omit name", () => {

@@ -2,7 +2,12 @@
 // Shared platform detection module - used by wrapper and postinstall
 
 const PLATFORM_PACKAGE_BASE_BY_WRAPPER_NAME = {
+  "oh-my-nusantara": "oh-my-nusantara",
   "oh-my-sarna": "oh-my-nusantara",
+  "oh-my-openagent": "oh-my-nusantara",
+  "oh-my-opencode": "oh-my-nusantara",
+  "lazycodex": "oh-my-nusantara",
+  "lazycodex-ai": "oh-my-nusantara",
 };
 
 export function getPackageBareName(packageName) {

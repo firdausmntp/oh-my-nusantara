@@ -22,7 +22,7 @@ describe("getPackageBareName", () => {
 });
 
 describe("resolvePlatformPackageBaseName", () => {
-  test("maps lazycodex wrapper to oh-my-openagent platform package family", () => {
+  test("maps lazycodex wrapper to oh-my-nusantara platform package family", () => {
     // #given
     const wrapperPackageName = "lazycodex";
 
@@ -30,10 +30,10 @@ describe("resolvePlatformPackageBaseName", () => {
     const resolvedPlatformBase = resolvePlatformPackageBaseName(wrapperPackageName);
 
     // #then
-    expect(resolvedPlatformBase).toBe("oh-my-openagent");
+    expect(resolvedPlatformBase).toBe("oh-my-nusantara");
   });
 
-  test("maps scoped lazycodex wrapper to oh-my-openagent platform package family", () => {
+  test("maps scoped lazycodex wrapper to oh-my-nusantara platform package family", () => {
     // #given
     const wrapperPackageName = "@code-yeongyu/lazycodex";
 
@@ -41,10 +41,10 @@ describe("resolvePlatformPackageBaseName", () => {
     const resolvedPlatformBase = resolvePlatformPackageBaseName(wrapperPackageName);
 
     // #then
-    expect(resolvedPlatformBase).toBe("oh-my-openagent");
+    expect(resolvedPlatformBase).toBe("oh-my-nusantara");
   });
 
-  test("maps lazycodex-ai wrapper to oh-my-openagent platform package family", () => {
+  test("maps lazycodex-ai wrapper to oh-my-nusantara platform package family", () => {
     // #given
     const wrapperPackageName = "lazycodex-ai";
 
@@ -52,10 +52,10 @@ describe("resolvePlatformPackageBaseName", () => {
     const resolvedPlatformBase = resolvePlatformPackageBaseName(wrapperPackageName);
 
     // #then
-    expect(resolvedPlatformBase).toBe("oh-my-openagent");
+    expect(resolvedPlatformBase).toBe("oh-my-nusantara");
   });
 
-  test("maps scoped lazycodex-ai wrapper to oh-my-openagent platform package family", () => {
+  test("maps scoped lazycodex-ai wrapper to oh-my-nusantara platform package family", () => {
     // #given
     const wrapperPackageName = "@code-yeongyu/lazycodex-ai";
 
@@ -63,10 +63,10 @@ describe("resolvePlatformPackageBaseName", () => {
     const resolvedPlatformBase = resolvePlatformPackageBaseName(wrapperPackageName);
 
     // #then
-    expect(resolvedPlatformBase).toBe("oh-my-openagent");
+    expect(resolvedPlatformBase).toBe("oh-my-nusantara");
   });
 
-  test("keeps oh-my-opencode wrapper mapped to oh-my-opencode platform package family", () => {
+  test("maps oh-my-opencode wrapper to oh-my-nusantara platform package family", () => {
     // #given
     const wrapperPackageName = "oh-my-opencode";
 
@@ -74,10 +74,10 @@ describe("resolvePlatformPackageBaseName", () => {
     const resolvedPlatformBase = resolvePlatformPackageBaseName(wrapperPackageName);
 
     // #then
-    expect(resolvedPlatformBase).toBe("oh-my-opencode");
+    expect(resolvedPlatformBase).toBe("oh-my-nusantara");
   });
 
-  test("keeps oh-my-openagent wrapper mapped to oh-my-openagent platform package family", () => {
+  test("maps oh-my-openagent wrapper to oh-my-nusantara platform package family", () => {
     // #given
     const wrapperPackageName = "oh-my-openagent";
 
@@ -85,7 +85,7 @@ describe("resolvePlatformPackageBaseName", () => {
     const resolvedPlatformBase = resolvePlatformPackageBaseName(wrapperPackageName);
 
     // #then
-    expect(resolvedPlatformBase).toBe("oh-my-openagent");
+    expect(resolvedPlatformBase).toBe("oh-my-nusantara");
   });
 });
 
@@ -281,15 +281,15 @@ describe("getPlatformPackageCandidates", () => {
 
   test("supports renamed package family via packageBaseName override", () => {
     // #given Linux x64 with glibc and renamed package base
-    const input = { platform: "linux", arch: "x64", libcFamily: "glibc", packageBaseName: "oh-my-openagent" };
+    const input = { platform: "linux", arch: "x64", libcFamily: "glibc", packageBaseName: "oh-my-nusantara" };
 
     // #when getting package candidates
     const result = getPlatformPackageCandidates(input);
 
     // #then returns renamed package family candidates
     expect(result).toEqual([
-      "oh-my-openagent-linux-x64",
-      "oh-my-openagent-linux-x64-baseline",
+      "oh-my-nusantara-linux-x64",
+      "oh-my-nusantara-linux-x64-baseline",
     ]);
   });
   test("returns only one candidate for ARM64", () => {

@@ -181,7 +181,10 @@ export async function wakeCommandGateway(
       return shellEscapeArg(value)
     })
 
-    const proc = spawn(["sh", "-c", interpolated], {
+    const shellArgs = process.platform === "win32"
+      ? ["cmd", "/c", interpolated]
+      : ["sh", "-c", interpolated]
+    const proc = spawn(shellArgs, {
       env: { ...process.env },
       stdout: "pipe",
       stderr: "ignore",

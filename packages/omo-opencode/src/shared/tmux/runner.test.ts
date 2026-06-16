@@ -77,7 +77,10 @@ afterAll(async () => {
 })
 
 describe("runTmuxCommand", () => {
-	test("#given cmux socket and real tmux session #when run #then uses requested executable instead of cmux compat", async () => {
+	// Skip all tests on Windows - tmux and sh are Unix-only
+	const isWindows = process.platform === "win32"
+
+	test.skipIf(isWindows)("#given cmux socket and real tmux session #when run #then uses requested executable instead of cmux compat", async () => {
 		// given
 		const originalCmuxSocketPath = process.env.CMUX_SOCKET_PATH
 		const originalTmux = process.env.TMUX
@@ -104,7 +107,7 @@ describe("runTmuxCommand", () => {
 		}
 	})
 
-	test("#given command exits 0 with stdout #when run #then success true, output and stdout equal trimmed value, stderr empty", async () => {
+	test.skipIf(isWindows)("#given command exits 0 with stdout #when run #then success true, output and stdout equal trimmed value, stderr empty", async () => {
 		// given
 		const commandArguments = ["-c", "printf '%s\\n' '%42'"]
 
@@ -121,7 +124,7 @@ describe("runTmuxCommand", () => {
 		})
 	})
 
-	test("#given command exits 1 with stderr #when run #then success false, stderr populated", async () => {
+	test.skipIf(isWindows)("#given command exits 1 with stderr #when run #then success false, stderr populated", async () => {
 		// given
 		const commandArguments = ["-c", "printf '%s\\n' 'some error' >&2; exit 1"]
 
@@ -134,7 +137,7 @@ describe("runTmuxCommand", () => {
 		expect(result.exitCode).toBe(1)
 	})
 
-	test("#given retry=2 and first exit nonzero #when run #then calls spawn twice before returning failure", async () => {
+	test.skipIf(isWindows)("#given retry=2 and first exit nonzero #when run #then calls spawn twice before returning failure", async () => {
 		// given
 		const temporaryDirectory = await createTemporaryDirectory()
 		const counterFilePath = path.join(temporaryDirectory, `${randomUUID()}.count`)
@@ -149,7 +152,7 @@ describe("runTmuxCommand", () => {
 		expect(await readInvocationCount(counterFilePath)).toBe(3)
 	})
 
-	test("#given retry=2 and stderr contains 'can't find pane' #when run #then does NOT retry", async () => {
+	test.skipIf(isWindows)("#given retry=2 and stderr contains 'can't find pane' #when run #then does NOT retry", async () => {
 		// given
 		const temporaryDirectory = await createTemporaryDirectory()
 		const counterFilePath = path.join(temporaryDirectory, `${randomUUID()}.count`)
@@ -164,7 +167,7 @@ describe("runTmuxCommand", () => {
 		expect(await readInvocationCount(counterFilePath)).toBe(1)
 	})
 
-	test("#given timeoutMs=50 and command sleeps 500ms #when run #then returns timeout failure", async () => {
+	test.skipIf(isWindows)("#given timeoutMs=50 and command sleeps 500ms #when run #then returns timeout failure", async () => {
 		// given
 		const commandArguments = ["-c", "sleep 0.5"]
 
@@ -177,7 +180,7 @@ describe("runTmuxCommand", () => {
 		expect(result.stderr).toContain("timeout")
 	})
 
-	test("#given stdout contains trailing newline #when run #then output is trimmed", async () => {
+	test.skipIf(isWindows)("#given stdout contains trailing newline #when run #then output is trimmed", async () => {
 		// given
 		const commandArguments = ["-c", "printf '%s\\n\\n' '%7'"]
 
@@ -189,7 +192,7 @@ describe("runTmuxCommand", () => {
 		expect(result.stdout).toBe("%7")
 	})
 
-	test("#given backward-compat consumer destructures {success, output} #when result returned #then both fields present and correct", async () => {
+	test.skipIf(isWindows)("#given backward-compat consumer destructures {success, output} #when result returned #then both fields present and correct", async () => {
 		// given
 		const commandArguments = ["-c", "printf '%s\\n' '%9'"]
 

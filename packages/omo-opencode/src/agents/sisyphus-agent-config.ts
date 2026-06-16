@@ -5,7 +5,7 @@ import { buildClaudeThinkingConfig } from "./types";
 import type { AgentMode } from "./types";
 
 const SISYPHUS_DESCRIPTION =
-  "Powerful AI orchestrator. Plans obsessively with todos, assesses search complexity before exploration, delegates strategically via category+skills combinations. Uses explore for internal code (parallel-friendly), librarian for external docs. (Sisyphus - OhMyOpenCode)";
+  "Powerful AI orchestrator. Plans obsessively with todos, assesses search complexity before exploration, delegates strategically via category+skills combinations. Uses explore for internal code (parallel-friendly), librarian for external docs. (Gajah Mada - OhMyOpenCode)";
 
 function buildSisyphusPermission(model: string): AgentConfig["permission"] {
   return {

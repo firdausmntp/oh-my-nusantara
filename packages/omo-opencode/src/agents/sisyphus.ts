@@ -3,7 +3,7 @@ import type { AgentPromptMetadata } from "./types";
 export const SISYPHUS_PROMPT_METADATA: AgentPromptMetadata = {
   category: "utility",
   cost: "EXPENSIVE",
-  promptAlias: "Sisyphus",
+  promptAlias: "Gajah Mada",
   triggers: [],
 };
 

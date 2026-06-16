@@ -6,7 +6,7 @@ import type { CheckResult } from "../types"
 import { readFileSync, promises as fs } from "node:fs"
 import path from "node:path"
 import { detectPluginConfigFile, getOpenCodeConfigDir, parseJsonc } from "../../../shared"
-import { CONFIG_BASENAME, LEGACY_CONFIG_BASENAME } from "../../../shared/plugin-identity"
+import { CONFIG_BASENAME, LEGACY_CONFIG_BASENAMES } from "../../../shared/plugin-identity"
 
 export async function checkTeamMode(): Promise<CheckResult> {
   const config = loadTeamModeConfig()
@@ -36,11 +36,11 @@ export async function checkTeamMode(): Promise<CheckResult> {
 function loadTeamModeConfig() {
   const projectConfig = detectPluginConfigFile(path.join(process.cwd(), ".opencode"), {
     basenames: [CONFIG_BASENAME],
-    legacyBasenames: [LEGACY_CONFIG_BASENAME],
+    legacyBasenames: [...LEGACY_CONFIG_BASENAMES],
   })
   const userConfig = detectPluginConfigFile(getOpenCodeConfigDir({ binary: "opencode" }), {
     basenames: [CONFIG_BASENAME],
-    legacyBasenames: [LEGACY_CONFIG_BASENAME],
+    legacyBasenames: [...LEGACY_CONFIG_BASENAMES],
   })
   const configPath = projectConfig.format !== "none" ? projectConfig.path : userConfig.path
   if (!configPath) return { team_mode: undefined }

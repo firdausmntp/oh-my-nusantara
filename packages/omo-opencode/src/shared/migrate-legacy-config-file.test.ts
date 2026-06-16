@@ -16,9 +16,9 @@ describe("migrateLegacyConfigFile", () => {
     rmSync(testDir, { recursive: true, force: true })
   })
 
-  describe("#given oh-my-opencode.jsonc exists but oh-my-openagent.jsonc does not", () => {
+  describe("#given oh-my-opencode.jsonc exists but oh-my-nusantara.jsonc does not", () => {
     describe("#when migrating the config file", () => {
-      it("#then writes oh-my-openagent.jsonc and renames the legacy file to a backup", () => {
+      it("#then writes oh-my-nusantara.jsonc and renames the legacy file to a backup", () => {
         const legacyPath = join(testDir, "oh-my-opencode.jsonc")
         const backupPath = join(testDir, "oh-my-opencode.jsonc.bak")
         writeFileSync(legacyPath, '{ "agents": {} }')
@@ -26,10 +26,10 @@ describe("migrateLegacyConfigFile", () => {
         const result = migrateLegacyConfigFile(legacyPath)
 
         expect(result).toBe(true)
-        expect(existsSync(join(testDir, "oh-my-openagent.jsonc"))).toBe(true)
+        expect(existsSync(join(testDir, "oh-my-nusantara.jsonc"))).toBe(true)
         expect(existsSync(legacyPath)).toBe(false)
         expect(existsSync(backupPath)).toBe(true)
-        expect(readFileSync(join(testDir, "oh-my-openagent.jsonc"), "utf-8")).toBe('{ "agents": {} }')
+        expect(readFileSync(join(testDir, "oh-my-nusantara.jsonc"), "utf-8")).toBe('{ "agents": {} }')
         expect(readFileSync(backupPath, "utf-8")).toBe('{ "agents": {} }')
       })
     })
@@ -40,7 +40,7 @@ describe("migrateLegacyConfigFile", () => {
       it("#then copies applied migration history to the canonical sidecar", () => {
         const legacyPath = join(testDir, "oh-my-opencode.json")
         const legacySidecarPath = `${legacyPath}.migrations.json`
-        const canonicalSidecarPath = join(testDir, "oh-my-openagent.json.migrations.json")
+        const canonicalSidecarPath = join(testDir, "oh-my-nusantara.json.migrations.json")
         writeFileSync(legacyPath, '{ "agents": { "oracle": { "model": "anthropic/claude-opus-4-6" } } }')
         writeFileSync(
           legacySidecarPath,
@@ -60,25 +60,25 @@ describe("migrateLegacyConfigFile", () => {
     })
   })
 
-  describe("#given oh-my-opencode.json exists but oh-my-openagent.json does not", () => {
+  describe("#given oh-my-opencode.json exists but oh-my-nusantara.json does not", () => {
     describe("#when migrating the config file", () => {
-      it("#then copies to oh-my-openagent.json", () => {
+      it("#then copies to oh-my-nusantara.json", () => {
         const legacyPath = join(testDir, "oh-my-opencode.json")
         writeFileSync(legacyPath, '{ "agents": {} }')
 
         const result = migrateLegacyConfigFile(legacyPath)
 
         expect(result).toBe(true)
-        expect(existsSync(join(testDir, "oh-my-openagent.json"))).toBe(true)
+        expect(existsSync(join(testDir, "oh-my-nusantara.json"))).toBe(true)
       })
     })
   })
 
-  describe("#given oh-my-openagent.jsonc already exists", () => {
+  describe("#given oh-my-nusantara.jsonc already exists", () => {
     describe("#when attempting migration", () => {
       it("#then returns false and does not overwrite", () => {
         const legacyPath = join(testDir, "oh-my-opencode.jsonc")
-        const canonicalPath = join(testDir, "oh-my-openagent.jsonc")
+        const canonicalPath = join(testDir, "oh-my-nusantara.jsonc")
         writeFileSync(legacyPath, '{ "old": true }')
         writeFileSync(canonicalPath, '{ "new": true }')
 
@@ -90,7 +90,7 @@ describe("migrateLegacyConfigFile", () => {
 
       it("#then does not copy legacy team_mode.tmux_visualization into the canonical file", () => {
         const legacyPath = join(testDir, "oh-my-opencode.json")
-        const canonicalPath = join(testDir, "oh-my-openagent.json")
+        const canonicalPath = join(testDir, "oh-my-nusantara.json")
         writeFileSync(legacyPath, JSON.stringify({
           team_mode: {
             enabled: true,
@@ -135,7 +135,7 @@ describe("migrateLegacyConfigFile", () => {
       it("#then returns true", () => {
         const legacyPath = join(testDir, "oh-my-opencode.jsonc")
         const backupPath = `${legacyPath}.bak`
-        const canonicalPath = join(testDir, "oh-my-openagent.jsonc")
+        const canonicalPath = join(testDir, "oh-my-nusantara.jsonc")
         writeFileSync(legacyPath, '{ "agents": {} }')
 
         // given: create backup path as directory (blocks rename, causing archive to return false)

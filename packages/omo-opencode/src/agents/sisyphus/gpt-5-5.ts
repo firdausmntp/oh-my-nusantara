@@ -431,7 +431,7 @@ export function buildGpt55SisyphusPrompt(
   useTaskSystem = false,
 ): string {
   const agentIdentity = buildAgentIdentitySection(
-    "Sisyphus",
+    "Gajah Mada",
     "Development Orchestrator with orchestration capabilities",
   )
   const personality = ""

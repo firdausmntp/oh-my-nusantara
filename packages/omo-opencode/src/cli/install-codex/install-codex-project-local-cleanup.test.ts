@@ -13,7 +13,7 @@ async function createPackagedCodexRepoRoot(): Promise<string> {
   const repoRoot = await mkdtemp(join(tmpdir(), "omo-codex-project-cleanup-repo-"))
   const codexPackageRoot = join(repoRoot, "packages", "omo-codex")
   const pluginRoot = join(codexPackageRoot, "plugin")
-  await writeFile(join(repoRoot, "package.json"), JSON.stringify({ name: "oh-my-openagent", version: "4.5.12" }))
+  await writeFile(join(repoRoot, "package.json"), JSON.stringify({ name: "oh-my-nusantara", version: "4.5.12" }))
   await mkdir(join(repoRoot, "dist", "cli"), { recursive: true })
   await writeFile(join(repoRoot, "dist", "cli", "index.js"), "#!/usr/bin/env node\n")
   await mkdir(join(pluginRoot, ".codex-plugin"), { recursive: true })
@@ -95,6 +95,7 @@ describe("install-codex project-local cleanup", () => {
     const repoRoot = await createPackagedCodexRepoRoot()
     await mkdir(projectDirectory, { recursive: true })
     await mkdir(codexHome, { recursive: true })
+    await mkdir(join(homeRoot, ".git"), { recursive: true }) // anchor walker to homeRoot so it doesn't reach real ~/.codex on Windows
     await writeFile(
       globalConfigPath,
       [

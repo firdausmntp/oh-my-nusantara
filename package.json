@@ -1,6 +1,6 @@
 {
   "name": "oh-my-nusantara",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "Nusantara Edition AI Development Orchestrator - OpenCode Plugin with Multi-Model Orchestration, Parallel Background Agents, LSP/AST Tools, and Indonesian Heritage Agent Names",
   "main": "./dist/index.js",
   "types": "dist/index.d.ts",

@@ -5,7 +5,70 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] (next-minor or 4.3.0)
+## [0.2.0] - 2026-01-16
+
+### Added
+
+- **Complete rebrand from oh-my-openagent to oh-my-nusantara** - all plugin identity, config basenames, and plugin entries updated
+- **Nusantara agent identities** - all agents rebranded with Indonesian cultural names:
+  - Gajah Mada (ultraworker), Hang Tuah (deep agent), Ki Hajar Dewantara (plan executor)
+  - Hayam Wuruk (plan builder), Mpu Tantular (oracle), Mpu Prapanca (librarian)
+  - Hang Jebat (explorer), Sunan Kalijaga (plan consultant), Tan Malaka (plan critic)
+  - Laksamana Malahayati (multimodal looker), Pemuda Sumpah (junior agent)
+- **Multi-level legacy support** - accepts `oh-my-openagent` and `oh-my-opencode` as legacy names for backward compatibility
+- **OH-MY-NUSANTARA-GUIDE.md** - complete migration guide with agent name mapping
+
+### Changed
+
+- **Plugin identity constants** - `PLUGIN_NAME` and `CONFIG_BASENAME` now use `oh-my-nusantara`
+- **Agent configuration** - all agent configs, display names, and identity prompts updated to Nusantara names
+- **Config loading** - detects `oh-my-nusantara.json/jsonc` as primary, with fallback to legacy names
+- **Test suite** - 140+ test files updated to reflect new plugin identity and agent names
+
+### Fixed
+
+- **27 test failures resolved** across three categories:
+  - Category A: Plugin identity tests (config basenames, plugin entries, version detection)
+  - Category B: Agent naming tests (display names, identity prompts, agent configs)
+  - Category C: Platform-specific tests (tmux, archive extraction, Windows compatibility)
+- **Version coherence** - all `omo-codex` manifests, hooks.json, and component package.json synced to v0.2.0
+- **Broken documentation links** - fixed references to missing files (README.ru.md)
+
+## [0.1.3] - 2026-01-15
+
+### Added
+
+- **subagent_same_model configuration** - new plugin config option to force subagents to use parent's model
+- **Enhanced agent fallback chains** - improved model resolution with multi-level fallback support
+- **Background task concurrency control** - configurable parallel execution limits for background agents
+
+### Changed
+
+- **Platform binary handling** - updated optional dependencies to latest platform packages
+- **Configuration validation** - stricter schema validation for plugin config files
+
+### Fixed
+
+- **Agent model inheritance** - subagents now properly inherit parent model when `subagent_same_model: true`
+- **Background task cleanup** - fixed memory leak in completed task artifact retention
+
+## [0.1.2] - 2026-01-14
+
+### Added
+
+- **Initial Nusantara fork** - forked from oh-my-openagent v4.8.1
+- **Content filter bypass** - replaced sensitive strings to work with proxy providers
+- **Cultural agent naming** - Indonesian historical figures for all agent identities
+
+### Changed
+
+- **Project metadata** - updated package.json, repository URLs, and documentation
+- **License attribution** - added proper credits to upstream oh-my-openagent project
+
+### Fixed
+
+- **Platform binary warnings** - resolved issues with missing platform-specific packages
+- **Postinstall script** - fixed binary detection and fallback logic
 
 ### Added
 
@@ -142,7 +205,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Documentation
 
 - Added [`ROADMAP.md`](ROADMAP.md) describing the package layering refactor and multi-harness direction.
-- Added OmO logo to [`README.ru.md`](README.ru.md) for parity with the other localized READMEs.
+- Added OmO logo to localized READMEs for parity.
 - PR merge policy documented: merge commits required, squash/rebase forbidden.
 - `prompt-async-gate-rfc.md` updated with `DEFAULT_PROMPT_ASYNC_POST_DISPATCH_HOLD_MS` 250 -> 2000 rationale.
 

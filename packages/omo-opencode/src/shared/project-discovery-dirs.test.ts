@@ -100,8 +100,8 @@ describe("project-discovery-dirs", () => {
     const { findProjectAgentsSkillDirs, findProjectClaudeSkillDirs } = await import("./project-discovery-dirs")
 
     // when
-    const claudeDirectories = findProjectClaudeSkillDirs(childDir)
-    const agentsDirectories = findProjectAgentsSkillDirs(childDir)
+    const claudeDirectories = findProjectClaudeSkillDirs(childDir, TEST_DIR)
+    const agentsDirectories = findProjectAgentsSkillDirs(childDir, TEST_DIR)
 
     // then
     expect(claudeDirectories).toEqual([canonicalPath(join(projectDir, ".claude", "skills"))])
@@ -132,9 +132,9 @@ describe("project-discovery-dirs", () => {
     mkdirSync(join(grandparentDir, ".opencode"), { recursive: true })
     mkdirSync(join(parentDir, ".opencode"), { recursive: true })
     mkdirSync(join(projectDir, ".opencode"), { recursive: true })
-    writeFileSync(join(grandparentDir, ".opencode", "oh-my-openagent.jsonc"), "{}")
-    writeFileSync(join(parentDir, ".opencode", "oh-my-openagent.jsonc"), "{}")
-    writeFileSync(join(projectDir, ".opencode", "oh-my-openagent.jsonc"), "{}")
+    writeFileSync(join(grandparentDir, ".opencode", "oh-my-nusantara.jsonc"), "{}")
+    writeFileSync(join(parentDir, ".opencode", "oh-my-nusantara.jsonc"), "{}")
+    writeFileSync(join(projectDir, ".opencode", "oh-my-nusantara.jsonc"), "{}")
 
     const { clearPluginConfigFileDetectionCache } = await import("./jsonc-parser")
     clearPluginConfigFileDetectionCache()
@@ -145,9 +145,9 @@ describe("project-discovery-dirs", () => {
 
     // then
     expect(paths).toEqual([
-      canonicalPath(join(projectDir, ".opencode", "oh-my-openagent.jsonc")),
-      canonicalPath(join(parentDir, ".opencode", "oh-my-openagent.jsonc")),
-      canonicalPath(join(grandparentDir, ".opencode", "oh-my-openagent.jsonc")),
+      canonicalPath(join(projectDir, ".opencode", "oh-my-nusantara.jsonc")),
+      canonicalPath(join(parentDir, ".opencode", "oh-my-nusantara.jsonc")),
+      canonicalPath(join(grandparentDir, ".opencode", "oh-my-nusantara.jsonc")),
     ])
   })
 
@@ -158,9 +158,9 @@ describe("project-discovery-dirs", () => {
     mkdirSync(join(TEST_DIR, ".opencode"), { recursive: true })
     mkdirSync(join(stopDir, ".opencode"), { recursive: true })
     mkdirSync(join(childDir, ".opencode"), { recursive: true })
-    writeFileSync(join(TEST_DIR, ".opencode", "oh-my-openagent.jsonc"), "{}")
-    writeFileSync(join(stopDir, ".opencode", "oh-my-openagent.jsonc"), "{}")
-    writeFileSync(join(childDir, ".opencode", "oh-my-openagent.jsonc"), "{}")
+    writeFileSync(join(TEST_DIR, ".opencode", "oh-my-nusantara.jsonc"), "{}")
+    writeFileSync(join(stopDir, ".opencode", "oh-my-nusantara.jsonc"), "{}")
+    writeFileSync(join(childDir, ".opencode", "oh-my-nusantara.jsonc"), "{}")
 
     const { clearPluginConfigFileDetectionCache } = await import("./jsonc-parser")
     clearPluginConfigFileDetectionCache()
@@ -171,8 +171,8 @@ describe("project-discovery-dirs", () => {
 
     // then
     expect(paths).toEqual([
-      canonicalPath(join(childDir, ".opencode", "oh-my-openagent.jsonc")),
-      canonicalPath(join(stopDir, ".opencode", "oh-my-openagent.jsonc")),
+      canonicalPath(join(childDir, ".opencode", "oh-my-nusantara.jsonc")),
+      canonicalPath(join(stopDir, ".opencode", "oh-my-nusantara.jsonc")),
     ])
   })
 

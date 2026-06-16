@@ -9,9 +9,9 @@ const TEST_USER_CONFIG_DIR = "/tmp/opencode-config"
 
 function testInvalidatePackage(packageName?: string): boolean {
   return invalidatePackage(packageName, {
-    acceptedPackageNames: ["oh-my-opencode", "oh-my-openagent"],
+    acceptedPackageNames: ["oh-my-opencode", "oh-my-openagent", "oh-my-nusantara"],
     cacheDir: TEST_OPENCODE_CACHE_DIR,
-    defaultPackageName: "oh-my-opencode",
+    defaultPackageName: "oh-my-nusantara",
     userConfigDir: TEST_USER_CONFIG_DIR,
   })
 }

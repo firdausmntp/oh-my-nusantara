@@ -233,7 +233,7 @@ export function findRepoRootFromImporter(importerDir: string): string {
   let current = importerDir
   for (let depth = 0; depth <= 7; depth += 1) {
     if (isRepoRootWithCodexPlugin(current)) return current
-    for (const wrapperPackageRoot of [join(current, "node_modules", "oh-my-openagent"), join(current, "oh-my-openagent")]) {
+    for (const wrapperPackageRoot of [join(current, "node_modules", "oh-my-nusantara"), join(current, "oh-my-nusantara"), join(current, "node_modules", "oh-my-openagent"), join(current, "oh-my-openagent")]) {
       if (isRepoRootWithCodexPlugin(wrapperPackageRoot)) return wrapperPackageRoot
     }
     current = resolve(current, "..")

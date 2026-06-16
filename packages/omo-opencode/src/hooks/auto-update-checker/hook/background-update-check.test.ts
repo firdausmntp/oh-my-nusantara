@@ -86,7 +86,7 @@ describe("createBackgroundUpdateCheckRunner — OpenCode-managed sandbox (#4318)
     const configDir = "/config"
 
     const findPluginEntry = mock(() => ({
-      entry: "oh-my-openagent",
+      entry: "oh-my-nusantara",
       pinnedVersion: null,
       isPinned: false,
       configPath: "/project/opencode.json",
@@ -140,7 +140,7 @@ describe("createBackgroundUpdateCheckRunner — OpenCode-managed sandbox (#4318)
     const nonError = Symbol("install failed")
 
     const findPluginEntry = mock(() => ({
-      entry: "oh-my-openagent",
+      entry: "oh-my-nusantara",
       pinnedVersion: null,
       isPinned: false,
       configPath: "/project/opencode.json",

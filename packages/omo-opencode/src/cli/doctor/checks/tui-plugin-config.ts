@@ -4,6 +4,7 @@ import { join } from "node:path"
 import {
   ACCEPTED_PACKAGE_NAMES,
   LEGACY_PLUGIN_NAME,
+  OLDER_LEGACY_PLUGIN_NAME,
   PLUGIN_NAME,
   getOpenCodeConfigDir,
   getOpenCodeConfigPaths,
@@ -60,6 +61,7 @@ function packageJsonExportsTui(pkgJsonPath: string): boolean | null {
 function packageNameFromServerEntry(entry: string): string | null {
   if (entry === PLUGIN_NAME || entry.startsWith(`${PLUGIN_NAME}@`)) return PLUGIN_NAME
   if (entry === LEGACY_PLUGIN_NAME || entry.startsWith(`${LEGACY_PLUGIN_NAME}@`)) return LEGACY_PLUGIN_NAME
+  if (entry === OLDER_LEGACY_PLUGIN_NAME || entry.startsWith(`${OLDER_LEGACY_PLUGIN_NAME}@`)) return OLDER_LEGACY_PLUGIN_NAME
   return null
 }
 
@@ -95,6 +97,7 @@ function isOurFilePluginEntry(entry: string): boolean {
 function isServerPluginEntry(entry: string): boolean {
   if (entry === PLUGIN_NAME || entry.startsWith(`${PLUGIN_NAME}@`)) return true
   if (entry === LEGACY_PLUGIN_NAME || entry.startsWith(`${LEGACY_PLUGIN_NAME}@`)) return true
+  if (entry === OLDER_LEGACY_PLUGIN_NAME || entry.startsWith(`${OLDER_LEGACY_PLUGIN_NAME}@`)) return true
   if (entry.startsWith("file:") && isOurFilePluginEntry(entry)) return true
   return false
 }
@@ -110,8 +113,10 @@ function isTuiPluginEntry(entry: string): boolean {
 function isNamedTuiPluginEntry(entry: string): boolean {
   const canonicalPrefix = `${PLUGIN_NAME}/${TUI_SUBPATH}`
   const legacyPrefix = `${LEGACY_PLUGIN_NAME}/${TUI_SUBPATH}`
+  const olderLegacyPrefix = `${OLDER_LEGACY_PLUGIN_NAME}/${TUI_SUBPATH}`
   if (entry === canonicalPrefix || entry.startsWith(`${canonicalPrefix}@`)) return true
   if (entry === legacyPrefix || entry.startsWith(`${legacyPrefix}@`)) return true
+  if (entry === olderLegacyPrefix || entry.startsWith(`${olderLegacyPrefix}@`)) return true
   return false
 }
 

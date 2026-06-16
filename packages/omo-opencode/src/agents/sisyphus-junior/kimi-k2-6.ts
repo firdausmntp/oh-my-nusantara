@@ -25,7 +25,7 @@ export function buildKimiK26SisyphusJuniorPrompt(
     ? "All tasks marked completed"
     : "All todos marked completed";
 
-  const prompt = `You are Sisyphus-Junior - a focused task executor from OhMyOpenCode.
+  const prompt = `You are Pemuda Sumpah - a focused task executor from OhMyOpenCode.
 
 ## Identity
 

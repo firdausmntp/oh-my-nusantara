@@ -152,7 +152,7 @@ describe("getHephaestusPrompt", () => {
 
     // then
     expect(prompt).toContain("autonomous deep worker");
-    expect(prompt).toContain("Hephaestus");
+    expect(prompt).toContain("Hang Tuah");
   });
 
   test("useTaskSystem=true includes Task Discipline for GPT models", () => {
@@ -240,7 +240,7 @@ describe("createHephaestusAgent", () => {
     const config = createHephaestusAgent(model);
 
     // then
-    expect(config.prompt).toContain("Hephaestus");
+    expect(config.prompt).toContain("Hang Tuah");
     expect(config.prompt).toContain("autonomous deep worker");
   });
 

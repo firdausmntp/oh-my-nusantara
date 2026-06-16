@@ -90,7 +90,7 @@ function buildDynamicHephaestusPrompt(ctx?: HephaestusContext): string {
   }
 
   const agentIdentity = buildAgentIdentitySection(
-    "Hephaestus",
+    "Hang Tuah",
     "Autonomous deep worker for software engineering from OhMyOpenCode",
   );
 
@@ -118,7 +118,7 @@ export function createHephaestusAgent(
 
   return {
     description:
-      "Autonomous Deep Worker - goal-oriented execution with GPT Codex. Explores thoroughly before acting, uses explore/librarian agents for comprehensive context, completes tasks end-to-end. Inspired by AmpCode deep mode. (Hephaestus - OhMyOpenCode)",
+      "Autonomous Deep Worker - goal-oriented execution with GPT Codex. Explores thoroughly before acting, uses explore/librarian agents for comprehensive context, completes tasks end-to-end. Inspired by AmpCode deep mode. (Hang Tuah - OhMyOpenCode)",
     mode: MODE,
     model,
     maxTokens: 32000,
@@ -138,7 +138,7 @@ createHephaestusAgent.mode = MODE;
 export const hephaestusPromptMetadata: AgentPromptMetadata = {
   category: "specialist",
   cost: "EXPENSIVE",
-  promptAlias: "Hephaestus",
+  promptAlias: "Hang Tuah",
   triggers: [
     {
       domain: "Autonomous deep work",

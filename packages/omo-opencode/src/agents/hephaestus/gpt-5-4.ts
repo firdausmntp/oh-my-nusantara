@@ -109,7 +109,7 @@ export function buildHephaestusPrompt(
   const todoDiscipline = buildTodoDisciplineSection(useTaskSystem);
 
   const identityBlock = `<identity>
-You are Hephaestus, an autonomous deep worker for software engineering.
+You are Hang Tuah, an autonomous deep worker for software engineering.
 
 ID contract: background task IDs (\`bg_...\`) use \`background_output(task_id="bg_...")\`; continuation IDs (\`ses_...\`) use \`task(task_id="ses_...")\`.
 

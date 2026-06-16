@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs"
 import { join } from "node:path"
 import { detectPluginConfigFile, getOpenCodeConfigDir, parseJsonc } from "../../../shared"
-import { CONFIG_BASENAME, LEGACY_CONFIG_BASENAME } from "../../../shared/plugin-identity"
+import { CONFIG_BASENAME, LEGACY_CONFIG_BASENAMES } from "../../../shared/plugin-identity"
 import type { OmoConfig } from "./model-resolution-types"
 
 const PROJECT_CONFIG_DIR = join(process.cwd(), ".opencode")
@@ -9,7 +9,7 @@ const PROJECT_CONFIG_DIR = join(process.cwd(), ".opencode")
 export function loadOmoConfig(): OmoConfig | null {
   const projectDetected = detectPluginConfigFile(PROJECT_CONFIG_DIR, {
     basenames: [CONFIG_BASENAME],
-    legacyBasenames: [LEGACY_CONFIG_BASENAME],
+    legacyBasenames: [...LEGACY_CONFIG_BASENAMES],
   })
   if (projectDetected.format !== "none") {
     try {
@@ -27,7 +27,7 @@ export function loadOmoConfig(): OmoConfig | null {
   const userConfigDir = getOpenCodeConfigDir({ binary: "opencode" })
   const userDetected = detectPluginConfigFile(userConfigDir, {
     basenames: [CONFIG_BASENAME],
-    legacyBasenames: [LEGACY_CONFIG_BASENAME],
+    legacyBasenames: [...LEGACY_CONFIG_BASENAMES],
   })
   if (userDetected.format !== "none") {
     try {

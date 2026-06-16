@@ -1,6 +1,8 @@
 import { existsSync, readFileSync } from "node:fs"
 
-import { LEGACY_PLUGIN_NAME, PLUGIN_NAME, getOpenCodeConfigPaths, parseJsonc } from "../../../shared"
+import { LEGACY_PLUGIN_NAME, OLDER_LEGACY_PLUGIN_NAME, PLUGIN_NAME, getOpenCodeConfigPaths, parseJsonc } from "../../../shared"
+
+const LEGACY_NAMES = [LEGACY_PLUGIN_NAME, OLDER_LEGACY_PLUGIN_NAME] as const
 
 export interface PluginInfo {
   registered: boolean
@@ -28,10 +30,12 @@ function parsePluginVersion(entry: string): string | null {
     if (!value || value === "latest") return null
     return value
   }
-  if (entry.startsWith(`${LEGACY_PLUGIN_NAME}@`)) {
-    const value = entry.slice(LEGACY_PLUGIN_NAME.length + 1)
-    if (!value || value === "latest") return null
-    return value
+  for (const legacyName of LEGACY_NAMES) {
+    if (entry.startsWith(`${legacyName}@`)) {
+      const value = entry.slice(legacyName.length + 1)
+      if (!value || value === "latest") return null
+      return value
+    }
   }
   return null
 }
@@ -41,10 +45,10 @@ function findPluginEntry(entries: string[]): { entry: string; isLocalDev: boolea
     if (entry === PLUGIN_NAME || entry.startsWith(`${PLUGIN_NAME}@`)) {
       return { entry, isLocalDev: false }
     }
-    if (entry === LEGACY_PLUGIN_NAME || entry.startsWith(`${LEGACY_PLUGIN_NAME}@`)) {
+    if (LEGACY_NAMES.some(name => entry === name || entry.startsWith(`${name}@`))) {
       return { entry, isLocalDev: false }
     }
-    if (entry.startsWith("file://") && (entry.includes(PLUGIN_NAME) || entry.includes(LEGACY_PLUGIN_NAME))) {
+    if (entry.startsWith("file://") && (entry.includes(PLUGIN_NAME) || LEGACY_NAMES.some(name => entry.includes(name)))) {
       return { entry, isLocalDev: true }
     }
   }

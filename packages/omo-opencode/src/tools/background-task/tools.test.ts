@@ -86,7 +86,7 @@ describe("background_output full_session", () => {
 
     const task = createTask({
       id: "task-1",
-      agent: "Sisyphus-Junior",
+      agent: "Pemuda Sumpah",
       category: "quick",
       description: "Fix flaky test",
       status: "running",

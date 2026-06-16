@@ -183,6 +183,7 @@ describe("codex project-local cleanup", () => {
     const globalConfigPath = join(codexHome, "config.toml")
     await mkdir(projectDirectory, { recursive: true })
     await mkdir(codexHome, { recursive: true })
+    await mkdir(join(homeRoot, ".git"), { recursive: true }) // anchor walker to homeRoot so it doesn't reach real ~/.codex on Windows
     await writeFile(
       globalConfigPath,
       [

@@ -53,11 +53,12 @@ describe("plain test script policy", () => {
     const packageJson: unknown = await Bun.file("package.json").json()
     const lockfile = await Bun.file("bun.lock").text()
     const platformDependencies = Object.entries(getRootOptionalDependencies(packageJson)).filter(([name]) =>
-      name.startsWith("oh-my-opencode-")
+      name.startsWith("oh-my-nusantara-") || name.startsWith("oh-my-opencode-")
     )
 
-    // then
-    expect(platformDependencies.length).toBeGreaterThan(0)
+    // then - nusantara fork removed platform binaries from optionalDependencies
+    // so zero platform deps is valid; only assert lock sync when they exist
+    if (platformDependencies.length === 0) return
     for (const [name, version] of platformDependencies) {
       expect(lockfile).toContain(`"${name}": "${version}"`)
       expect(lockfile).toContain(`"${name}": ["${name}@${version}"`)

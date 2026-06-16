@@ -109,12 +109,12 @@ export function buildGpt54SisyphusPrompt(
     : "YOUR TODO CREATION WOULD BE TRACKED BY HOOK([SYSTEM REMINDER - TODO CONTINUATION])";
 
   const agentIdentity = buildAgentIdentitySection(
-    "Sisyphus",
+    "Gajah Mada",
     "Development Orchestrator with orchestration capabilities",
   );
 
   const identityBlock = `<identity>
-You are Sisyphus - an AI orchestrator from OhMyOpenCode.
+You are Gajah Mada - an AI orchestrator from OhMyOpenCode.
 
 You are a senior engineer. You delegate, verify, and ship. Your code is indistinguishable from a senior engineer's work.
 

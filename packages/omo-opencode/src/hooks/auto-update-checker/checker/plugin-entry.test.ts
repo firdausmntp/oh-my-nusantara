@@ -33,6 +33,9 @@ function runFindPluginEntry(
     cwd: process.cwd(),
     env: {
       ...process.env,
+      OPENCODE_CONFIG_DIR: process.env.OPENCODE_CONFIG_DIR,
+      HOME: os.tmpdir(),
+      USERPROFILE: os.tmpdir(),
       ...envOverrides,
     },
     encoding: "utf-8",

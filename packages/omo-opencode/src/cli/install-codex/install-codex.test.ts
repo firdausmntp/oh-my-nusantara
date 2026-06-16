@@ -45,7 +45,7 @@ async function createRepoWithBuiltComponentBins(input: { readonly includeRootCli
   await mkdir(join(repoRoot, "src"), { recursive: true })
   await mkdir(codexPackageRoot, { recursive: true })
   await writeFile(join(repoRoot, "src", "index.ts"), "export {}\n")
-  await writeFile(join(repoRoot, "package.json"), JSON.stringify({ name: "oh-my-openagent", version: "4.7.5" }))
+  await writeFile(join(repoRoot, "package.json"), JSON.stringify({ name: "oh-my-nusantara", version: "4.7.5" }))
   await writeFile(
     join(codexPackageRoot, "marketplace.json"),
     JSON.stringify({ name: "sisyphuslabs", plugins: [{ name: "omo", source: "./plugins/omo" }] }),
@@ -76,8 +76,8 @@ describe("install-codex", () => {
   test("#given npm platform binary package #when resolving vendored repo root #then finds sibling wrapper package", async () => {
     // given
     const nodeModules = await mkdtemp(join(tmpdir(), "omo-codex-node-modules-"))
-    const importerDir = join(nodeModules, "oh-my-openagent-darwin-arm64", "bin")
-    const wrapperRoot = join(nodeModules, "oh-my-openagent")
+    const importerDir = join(nodeModules, "oh-my-nusantara-darwin-arm64", "bin")
+    const wrapperRoot = join(nodeModules, "oh-my-nusantara")
     await mkdir(join(importerDir), { recursive: true })
     await mkdir(join(wrapperRoot, "packages", "omo-codex", "plugin", ".codex-plugin"), { recursive: true })
     await writeFile(join(wrapperRoot, "packages", "omo-codex", "plugin", ".codex-plugin", "plugin.json"), "{}")

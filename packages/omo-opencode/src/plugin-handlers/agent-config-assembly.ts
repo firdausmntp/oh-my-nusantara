@@ -4,6 +4,7 @@ import type { OhMyOpenCodeConfig } from "../config";
 import {
   getAgentConfigKey,
   getAgentDisplayName,
+  getAgentListDisplayName,
   normalizeAgentForPromptKey,
 } from "../shared/agent-display-names";
 import { migrateAgentConfig } from "../shared/permission-compat";
@@ -182,6 +183,8 @@ async function assembleSisyphusEnabledConfig(params: AssembleAgentConfigParams):
   const protectedBuiltinAgentNames = createProtectedAgentNameSet([
     ...Object.keys(agentConfig),
     ...Object.keys(params.builtinAgents),
+    // Include display names to protect against case-insensitive matching
+    ...Object.keys(params.builtinAgents).map((key) => getAgentListDisplayName(key)),
   ]);
   const filteredSources = filterCustomAgentSources(params.sources, protectedBuiltinAgentNames);
   const filteredConfigAgents = configAgent
@@ -214,7 +217,11 @@ async function assembleSisyphusEnabledConfig(params: AssembleAgentConfigParams):
 }
 
 function assembleSisyphusDisabledConfig(params: AssembleAgentConfigParams): void {
-  const protectedBuiltinAgentNames = createProtectedAgentNameSet(Object.keys(params.builtinAgents));
+  const protectedBuiltinAgentNames = createProtectedAgentNameSet([
+    ...Object.keys(params.builtinAgents),
+    // Include display names to protect against case-insensitive matching
+    ...Object.keys(params.builtinAgents).map((key) => getAgentListDisplayName(key)),
+  ]);
   const filteredSources = filterCustomAgentSources(params.sources, protectedBuiltinAgentNames);
   const filteredConfigAgents = params.sources.configAgent
     ? defaultSubagentMode(

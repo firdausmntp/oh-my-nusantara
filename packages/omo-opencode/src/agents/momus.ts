@@ -287,7 +287,7 @@ export function createMomusAgent(model: string): AgentConfig {
 
   const base = {
     description:
-      "Expert reviewer for evaluating work plans against rigorous clarity, verifiability, and completeness standards. (Momus - OhMyOpenCode)",
+      "Expert reviewer for evaluating work plans against rigorous clarity, verifiability, and completeness standards. (Tan Malaka - OhMyOpenCode)",
     mode: MODE,
     model,
     temperature: 0.1,
@@ -314,7 +314,7 @@ createMomusAgent.mode = MODE;
 export const momusPromptMetadata: AgentPromptMetadata = {
   category: "advisor",
   cost: "EXPENSIVE",
-  promptAlias: "Momus",
+  promptAlias: "Tan Malaka",
   triggers: [
     {
       domain: "Plan review",

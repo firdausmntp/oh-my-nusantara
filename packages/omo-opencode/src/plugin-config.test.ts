@@ -538,7 +538,7 @@ describe("loadPluginConfig", () => {
     const projectConfigDir = join(projectDir, ".opencode")
     const legacyConfigPath = join(projectConfigDir, "oh-my-opencode.jsonc")
     const backupConfigPath = `${legacyConfigPath}.bak`
-    const canonicalConfigPath = join(projectConfigDir, "oh-my-openagent.jsonc")
+    const canonicalConfigPath = join(projectConfigDir, "oh-my-nusantara.jsonc")
 
     tempDirs.push(rootDir)
     mkdirSync(userConfigDir, { recursive: true })
@@ -604,7 +604,7 @@ describe("loadPluginConfig", () => {
     const projectDir = join(rootDir, "project")
     const projectConfigDir = join(projectDir, ".opencode")
     const legacyConfigPath = join(projectConfigDir, "oh-my-opencode.jsonc")
-    const canonicalConfigPath = join(projectConfigDir, "oh-my-openagent.jsonc")
+    const canonicalConfigPath = join(projectConfigDir, "oh-my-nusantara.jsonc")
 
     tempDirs.push(rootDir)
     mkdirSync(userConfigDir, { recursive: true })
@@ -627,7 +627,7 @@ describe("loadPluginConfig", () => {
     // given
     const { userConfigDir, projectDir } =
       createLoadPluginConfigTestContext("omo-plugin-config-preserve-user-model-")
-    const userConfigPath = join(userConfigDir, "oh-my-openagent.json")
+    const userConfigPath = join(userConfigDir, "oh-my-nusantara.json")
     writeJsonFile(userConfigPath, {
       agents: {
         sisyphus: {
@@ -1157,7 +1157,7 @@ describe("loadPluginConfig", () => {
     const workDir = join(homeDir, "work")
     const projectDir = join(workDir, "project")
     const ancestorLegacyPath = join(workDir, ".opencode", "oh-my-opencode.jsonc")
-    const ancestorCanonicalPath = join(workDir, ".opencode", "oh-my-openagent.jsonc")
+    const ancestorCanonicalPath = join(workDir, ".opencode", "oh-my-nusantara.jsonc")
 
     tempDirs.push(rootDir)
     mkdirSync(userConfigDir, { recursive: true })
@@ -1165,7 +1165,7 @@ describe("loadPluginConfig", () => {
     mkdirSync(join(workDir, ".opencode"), { recursive: true })
     mkdirSync(join(projectDir, ".opencode"), { recursive: true })
 
-    writeFileSync(join(userConfigDir, "oh-my-openagent.jsonc"), "{}")
+    writeFileSync(join(userConfigDir, "oh-my-nusantara.jsonc"), "{}")
     writeFileSync(
       ancestorLegacyPath,
       JSON.stringify({ agents: { oracle: { model: "ancestor-legacy/model" } } })

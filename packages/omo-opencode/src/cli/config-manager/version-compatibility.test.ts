@@ -82,7 +82,7 @@ describe("extractVersionFromPluginEntry", () => {
   })
 
   it("returns null for bare plugin entry", () => {
-    const version = extractVersionFromPluginEntry("oh-my-openagent")
+    const version = extractVersionFromPluginEntry("oh-my-nusantara")
     expect(version).toBeNull()
   })
 

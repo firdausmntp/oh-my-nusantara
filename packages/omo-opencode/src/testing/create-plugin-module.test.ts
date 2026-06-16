@@ -236,11 +236,11 @@ describe("createPluginModule()", () => {
       const pluginModule = createTestPluginModule()
       const duplicatePlugins = [
         sourcePlugin,
-        "oh-my-openagent@latest",
+        "oh-my-nusantara@latest",
       ]
       mockDetectDuplicateOmoPlugin.mockReturnValue({
         detected: true,
-        pluginName: "oh-my-openagent",
+        pluginName: "oh-my-nusantara",
         duplicatePlugins,
         allPlugins: duplicatePlugins,
       })

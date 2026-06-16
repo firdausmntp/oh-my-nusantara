@@ -6,7 +6,7 @@ import { findOpenCodeBinary, getOpenCodeVersion, compareVersions } from "./syste
 import { getPluginInfo } from "./system-plugin"
 import { getLatestPluginVersion, getLoadedPluginVersion, getSuggestedInstallTag } from "./system-loaded-version"
 import { parseJsonc } from "../../../shared/jsonc-parser"
-import { PUBLISHED_PACKAGE_NAME, PLUGIN_NAME, LEGACY_PLUGIN_NAME } from "../../../shared/plugin-identity"
+import { PUBLISHED_PACKAGE_NAME, PLUGIN_NAME, LEGACY_PLUGIN_NAME, OLDER_LEGACY_PLUGIN_NAME } from "../../../shared/plugin-identity"
 
 const runtime = globalThis as typeof globalThis & { Bun?: { version?: string } }
 
@@ -130,14 +130,16 @@ export async function checkSystem(deps: SystemCheckDeps = defaultDeps): Promise<
   }
 
   if (pluginInfo.entry && !pluginInfo.isLocalDev) {
-    const isLegacyName = pluginInfo.entry === LEGACY_PLUGIN_NAME
-      || pluginInfo.entry.startsWith(`${LEGACY_PLUGIN_NAME}@`)
+    const LEGACY_NAMES = [LEGACY_PLUGIN_NAME, OLDER_LEGACY_PLUGIN_NAME] as const
+    const matchedLegacy = LEGACY_NAMES.find(name =>
+      pluginInfo.entry === name || pluginInfo.entry!.startsWith(`${name}@`),
+    )
 
-    if (isLegacyName) {
-      const suggestedEntry = pluginInfo.entry.replace(LEGACY_PLUGIN_NAME, PLUGIN_NAME)
+    if (matchedLegacy) {
+      const suggestedEntry = pluginInfo.entry.replace(matchedLegacy, PLUGIN_NAME)
       issues.push({
         title: "Using legacy package name",
-        description: `Your opencode.json references "${LEGACY_PLUGIN_NAME}" which has been renamed to "${PLUGIN_NAME}". The old name may stop working in a future release.`,
+        description: `Your opencode.json references "${matchedLegacy}" which has been renamed to "${PLUGIN_NAME}". The old name may stop working in a future release.`,
         fix: `Update your opencode.json plugin entry: "${pluginInfo.entry}" → "${suggestedEntry}"`,
         severity: "warning",
         affects: ["plugin loading"],

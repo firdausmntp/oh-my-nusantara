@@ -60,7 +60,7 @@ describe("checkForLegacyPluginEntry", () => {
 
     try {
       // given
-      writeFileSync(join(testConfigDir, "opencode.json"), JSON.stringify({ plugin: ["oh-my-openagent"] }, null, 2))
+      writeFileSync(join(testConfigDir, "opencode.json"), JSON.stringify({ plugin: ["oh-my-nusantara"] }, null, 2))
 
       // when
       const result = checkForLegacyPluginEntry(testConfigDir)

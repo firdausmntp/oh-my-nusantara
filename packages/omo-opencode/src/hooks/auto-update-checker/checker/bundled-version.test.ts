@@ -14,7 +14,7 @@ describe("getBundledVersion (GH-4211)", () => {
     const bundledVersion = getBundledVersion()
 
     // then the banner source matches --version's source and never the 0.1.0 workspace stub
-    expect(rootPackageJson.name).toBe("oh-my-opencode")
+    expect(rootPackageJson.name).toBe("oh-my-nusantara")
     expect(bundledVersion).toBe(rootPackageJson.version)
     expect(bundledVersion).not.toBe(workspacePackageJson.version)
   })

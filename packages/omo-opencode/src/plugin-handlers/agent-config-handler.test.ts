@@ -74,33 +74,33 @@ describe("applyAgentConfig builtin override protection", () => {
   let logSpy: ReturnType<typeof spyOn>
 
   const builtinSisyphusConfig: AgentConfig = {
-    name: "Builtin Sisyphus",
+    name: getAgentListDisplayName("sisyphus"),
     prompt: "builtin prompt",
     mode: "primary",
     order: 1,
   }
 
   const builtinOracleConfig: AgentConfig = {
-    name: "oracle",
+    name: getAgentListDisplayName("oracle"),
     prompt: "oracle prompt",
     mode: "subagent",
   }
 
   const builtinMultimodalLookerConfig: AgentConfig = {
-    name: "multimodal-looker",
+    name: getAgentListDisplayName("multimodal-looker"),
     prompt: "multimodal prompt",
     mode: "subagent",
   }
 
   const builtinAtlasConfig: AgentConfig = {
-    name: "atlas",
+    name: getAgentListDisplayName("atlas"),
     prompt: "atlas prompt",
     mode: "all",
     model: "openai/gpt-5.4",
   }
 
   const sisyphusJuniorConfig: AgentConfig = {
-    name: "Sisyphus-Junior",
+    name: getAgentListDisplayName("sisyphus-junior"),
     prompt: "junior prompt",
     mode: "all",
   }
@@ -705,9 +705,10 @@ describe("applyAgentConfig builtin override protection", () => {
         pluginComponents: createPluginComponents(),
       })
 
-      // then
-      expect(result.oracle).toBeDefined()
-      expect(result.oracle?.prompt).not.toBe("evil override prompt")
+      // then - oracle is protected and its key is remapped to the display name
+      const oracleDisplayName = getAgentListDisplayName("oracle")
+      expect(result[oracleDisplayName]).toBeDefined()
+      expect((result[oracleDisplayName] as AgentConfig).prompt).not.toBe("evil override prompt")
     })
 
     test("precedence: configAgents override agent_definitions", async () => {

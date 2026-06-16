@@ -230,7 +230,11 @@ describe("OpenClaw Dispatcher", () => {
     expect(proc.kill).toHaveBeenCalledWith("SIGKILL")
   })
 
-  test("wakeCommandGateway returns correlation metadata from stdout JSON", async () => {
+  // These tests exercise shell command spawning (sh -c / cmd /c) which is inherently
+  // platform-specific in quoting semantics. Skip on Windows where cmd /c has different rules.
+  const isWindows = process.platform === "win32"
+
+  test.skipIf(isWindows)("wakeCommandGateway returns correlation metadata from stdout JSON", async () => {
     const result = await wakeCommandGateway(
       "command",
       {
@@ -250,7 +254,7 @@ describe("OpenClaw Dispatcher", () => {
     })
   })
 
-  test("wakeCommandGateway returns correlation metadata from OpenClaw CLI stdout", async () => {
+  test.skipIf(isWindows)("wakeCommandGateway returns correlation metadata from OpenClaw CLI stdout", async () => {
     const result = await wakeCommandGateway(
       "command",
       {

@@ -37,7 +37,7 @@ describe("resolveCallerTeamLead", () => {
 
   test("returns an eligible sisyphus lead for the suffixed display name", () => {
     // given
-    const rawAgentName = "Sisyphus - Ultraworker"
+    const rawAgentName = "Gajah Mada - Ultraworker"
 
     // when
     const result = resolveCallerTeamLead(rawAgentName)
@@ -45,7 +45,7 @@ describe("resolveCallerTeamLead", () => {
     // then
     expect(result).toEqual({
       agentTypeId: "sisyphus",
-      displayName: "Sisyphus - ultraworker",
+      displayName: "Gajah Mada - Ultraworker",
       isEligibleForTeamLead: true,
     })
   })

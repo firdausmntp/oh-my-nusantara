@@ -7,7 +7,7 @@ const MODE: AgentMode = "subagent"
 export const MULTIMODAL_LOOKER_PROMPT_METADATA: AgentPromptMetadata = {
   category: "utility",
   cost: "CHEAP",
-  promptAlias: "Multimodal Looker",
+  promptAlias: "Laksamana Malahayati",
   triggers: [],
 }
 

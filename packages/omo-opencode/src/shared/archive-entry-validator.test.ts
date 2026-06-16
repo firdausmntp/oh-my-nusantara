@@ -101,7 +101,10 @@ describe("validateArchiveEntries", () => {
 })
 
 describe("archive extraction preflight", () => {
-	it("rejects tar archives with traversal entries before extraction", async () => {
+	// Skip on Windows: uses python3, symlinks (require admin), and Unix-specific operations
+	const isWindows = process.platform === "win32"
+
+	it.skipIf(isWindows)("rejects tar archives with traversal entries before extraction", async () => {
 		//#given
 		const rootDir = createTestDir()
 		const archivePath = join(rootDir, "malicious.tar.gz")
@@ -135,7 +138,7 @@ describe("archive extraction preflight", () => {
 		expect(errorMessage).toMatch(/path traversal/i)
 	})
 
-	it("rejects tar archives with hard-link traversal before extraction", async () => {
+	it.skipIf(isWindows)("rejects tar archives with hard-link traversal before extraction", async () => {
 		//#given
 		const rootDir = createTestDir()
 		const archivePath = join(rootDir, "malicious-hard-link.tar.gz")
@@ -168,7 +171,7 @@ describe("archive extraction preflight", () => {
 		expect(errorMessage).toMatch(/hard link target|path traversal/i)
 	})
 
-	it("rejects zip archives with symlink escapes before extraction", async () => {
+	it.skipIf(isWindows)("rejects zip archives with symlink escapes before extraction", async () => {
 		//#given
 		const rootDir = createTestDir()
 		const archivePath = join(rootDir, "malicious.zip")
@@ -203,7 +206,7 @@ describe("archive extraction preflight", () => {
 		expect(errorMessage).toMatch(/symlink target/i)
 	})
 
-	it("extracts safe tar and zip archives into the destination directory", async () => {
+	it.skipIf(isWindows)("extracts safe tar and zip archives into the destination directory", async () => {
 		//#given
 		const rootDir = createTestDir()
 		const sourceDir = join(rootDir, "source")

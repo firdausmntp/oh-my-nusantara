@@ -521,7 +521,7 @@ describe("external-plugin-detector", () => {
 
       // then
       expect(result.detected).toBe(true)
-      expect(result.pluginName).toBe("oh-my-openagent")
+      expect(result.pluginName).toBe("oh-my-nusantara")
       expect(result.duplicatePlugins).toEqual([
         sourcePlugin,
         "oh-my-openagent@latest",

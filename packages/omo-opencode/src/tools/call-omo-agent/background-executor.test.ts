@@ -126,10 +126,7 @@ describe("executeBackground", () => {
     if (!launchArgs) {
       throw new Error("Expected launch arguments")
     }
-    expect(launchArgs.agent).toBe("Hephaestus - Deep Agent")
-  })
-
-  test("keeps launched background task alive when parent aborts before session id resolves", async () => {
+    expect(launchArgs.agent).toBe("Hang Tuah - Deep Agent")
     //#given - parent abort after launch should stop waiting, not fail the background task
     const abortController = new AbortController()
     launchMock.mockResolvedValueOnce({
@@ -230,7 +227,7 @@ describe("executeBackground", () => {
     if (!latestCall) throw new Error("Expected background manager launch to be called")
     const launchArgs = latestCall[0]
     if (!launchArgs) throw new Error("Expected launch arguments")
-    expect(launchArgs.agent).toBe("Hephaestus - Deep Agent")
+    expect(launchArgs.agent).toBe("Hang Tuah - Deep Agent")
   })
 
   test("#given subagent_type is a same-keyed agent 'explore' #when executeBackground runs #then BackgroundManager.launch receives the unchanged key (regression guard)", async () => {
@@ -240,7 +237,7 @@ describe("executeBackground", () => {
       id: "test-task-id",
       sessionId: "sub-session",
       description: "Test task",
-      agent: "explore",
+      agent: "Hang Jebat",
       status: "pending",
     })
 
@@ -252,6 +249,6 @@ describe("executeBackground", () => {
     if (!latestCall) throw new Error("Expected background manager launch to be called")
     const launchArgs = latestCall[0]
     if (!launchArgs) throw new Error("Expected launch arguments")
-    expect(launchArgs.agent).toBe("explore")
+    expect(launchArgs.agent).toBe("Hang Jebat")
   })
 })

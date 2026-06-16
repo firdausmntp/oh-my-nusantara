@@ -6,10 +6,15 @@ import * as spawnWithWindowsHideModule from "../../shared/spawn-with-windows-hid
 import { spawnWithTimeout } from "./spawn-with-timeout"
 
 describe("spawnWithTimeout", () => {
+  const isWindows = process.platform === "win32"
+
   describe("#given a command that completes quickly", () => {
     it("returns stdout and exit code", async () => {
-      // when
-      const result = await spawnWithTimeout(["echo", "hello"], { stdout: "pipe", stderr: "pipe" })
+      // when - use process.execPath for cross-platform compatibility
+      const result = await spawnWithTimeout(
+        [process.execPath, "-e", "console.log('hello')"],
+        { stdout: "pipe", stderr: "pipe" }
+      )
 
       // then
       expect(result.timedOut).toBe(false)

@@ -8,6 +8,7 @@ import { createRuntimeTmuxConfig, isTmuxIntegrationEnabled } from "../create-run
 import { createTools } from "../create-tools"
 import { createRuntimeSkillSourceServer, selectRuntimeSecuritySkills } from "../features/opencode-runtime-skills"
 import { initializeOpenClaw } from "../openclaw"
+import { PLUGIN_NAME } from "../shared/plugin-identity"
 import { createPluginDispose } from "../plugin-dispose"
 import { createPluginInterface } from "../plugin-interface"
 import { loadPluginConfig } from "../plugin-config"
@@ -240,7 +241,7 @@ export function createPluginModule(overrides: Partial<PluginModuleDeps> = {}): P
   }
 
   return {
-    id: "oh-my-openagent",
+    id: PLUGIN_NAME,
     server: serverPlugin,
   }
 }

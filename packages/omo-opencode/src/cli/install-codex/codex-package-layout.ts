@@ -9,6 +9,7 @@ const PACKAGED_CODEX_INSTALLER_NAMES = new Set([
   "lazycodex-ai",
   "oh-my-opencode",
   "oh-my-openagent",
+  "oh-my-nusantara",
 ])
 
 export async function shouldBuildSourcePackages(repoRoot: string): Promise<boolean> {

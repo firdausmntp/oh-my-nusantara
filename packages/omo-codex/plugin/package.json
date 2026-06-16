@@ -1,6 +1,6 @@
 {
-	"name": "@sisyphuslabs/omo-codex-plugin",
-	"version": "4.9.2",
+  "name": "@oh-my-opencode/omo-codex-plugin",
+  "version": "0.2.0",
 	"description": "Aggregate Codex plugin root for OMO components.",
 	"type": "module",
 	"packageManager": "npm@11.12.1",

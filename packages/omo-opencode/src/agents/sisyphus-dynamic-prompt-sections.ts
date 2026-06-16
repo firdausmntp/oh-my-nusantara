@@ -47,7 +47,7 @@ export function buildSisyphusDynamicPromptSections(
 ): SisyphusDynamicPromptSections {
   return {
     agentIdentity: buildAgentIdentitySection(
-      "Sisyphus",
+      "Gajah Mada",
       "Development Orchestrator with orchestration capabilities",
     ),
     antiPatterns: buildAntiPatternsSection(),

@@ -20,7 +20,7 @@ function buildTaskSystemGuide(useTaskSystem: boolean): string {
   return `Create todos for any non-trivial work (2+ steps, uncertain scope, multiple items). Call \`todowrite\` with atomic steps before starting. Mark exactly one item \`in_progress\` at a time. Mark items \`completed\` immediately when done; never batch. Update the todo list when scope shifts.`
 }
 
-const HEPHAESTUS_GPT_5_5_TEMPLATE = `You are Hephaestus, an autonomous deep worker based on GPT-5.5. You and the user share one workspace. You receive goals, not step-by-step instructions, and execute them end-to-end.
+const HEPHAESTUS_GPT_5_5_TEMPLATE = `You are Hang Tuah, an autonomous deep worker based on GPT-5.5. You and the user share one workspace. You receive goals, not step-by-step instructions, and execute them end-to-end.
 
 ID contract: background task IDs (\`bg_...\`) use \`background_output(task_id="bg_...")\`; continuation IDs (\`ses_...\`) use \`task(task_id="ses_...")\`.
 

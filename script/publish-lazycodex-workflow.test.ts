@@ -225,7 +225,7 @@ describe("LazyCodex publish workflow", () => {
       publishMainJob.indexOf("bun run build:lsp-tools-mcp && bun run build:lsp-daemon && bun run build") >= 0 &&
       publishMainJob.indexOf("bun run build:lsp-tools-mcp && bun run build:lsp-daemon && bun run build") <
         publishMainJob.indexOf("name: Publish lazycodex-ai")
-    const shimKeepsLazycodexMappedForSharedWrapper = platformResolver.includes("lazycodex: \"oh-my-openagent\"")
+    const shimKeepsLazycodexMappedForSharedWrapper = platformResolver.includes('"lazycodex": "oh-my-nusantara"')
 
     // #then
     expect(lazycodexStepUsesReleaseVersion, "lazycodex publish step must use the release version so unpublished versions are not reused").toBe(true)

@@ -26,7 +26,7 @@ describe("getCachedVersion (GH-3257)", () => {
     cacheRoot = mkdtempSync(join(tmpdir(), "omo-cached-version-"))
     mockState.candidates = [
       join(cacheRoot, "node_modules", "oh-my-opencode", "package.json"),
-      join(cacheRoot, "node_modules", "oh-my-openagent", "package.json"),
+      join(cacheRoot, "node_modules", "oh-my-nusantara", "package.json"),
     ]
     mockState.walkUpResult = null
   })
@@ -49,9 +49,9 @@ describe("getCachedVersion (GH-3257)", () => {
     // GH-3257: npm users who install the aliased `oh-my-openagent` package get
     // node_modules/oh-my-openagent/package.json, not the canonical oh-my-opencode
     // path. The cached version resolver must check both.
-    const pkgDir = join(cacheRoot, "node_modules", "oh-my-openagent")
+    const pkgDir = join(cacheRoot, "node_modules", "oh-my-nusantara")
     mkdirSync(pkgDir, { recursive: true })
-    writeFileSync(join(pkgDir, "package.json"), JSON.stringify({ name: "oh-my-openagent", version: "3.16.0" }))
+    writeFileSync(join(pkgDir, "package.json"), JSON.stringify({ name: "oh-my-nusantara", version: "3.16.0" }))
 
     expect(getIsolatedCachedVersion()).toBe("3.16.0")
   })
@@ -61,9 +61,9 @@ describe("getCachedVersion (GH-3257)", () => {
     mkdirSync(legacyDir, { recursive: true })
     writeFileSync(join(legacyDir, "package.json"), JSON.stringify({ name: "oh-my-opencode", version: "3.16.0" }))
 
-    const aliasDir = join(cacheRoot, "node_modules", "oh-my-openagent")
+    const aliasDir = join(cacheRoot, "node_modules", "oh-my-nusantara")
     mkdirSync(aliasDir, { recursive: true })
-    writeFileSync(join(aliasDir, "package.json"), JSON.stringify({ name: "oh-my-openagent", version: "3.15.0" }))
+    writeFileSync(join(aliasDir, "package.json"), JSON.stringify({ name: "oh-my-nusantara", version: "3.15.0" }))
 
     expect(getIsolatedCachedVersion()).toBe("3.16.0")
   })
@@ -78,10 +78,10 @@ describe("getCachedVersion (GH-3257)", () => {
     // install at <CACHE_DIR>/node_modules/<pkg>/ can drift independently when
     // bun re-resolves "latest". The flat install must NOT take precedence,
     // because that's the path the user is actually running.
-    const sandboxDir = join(cacheRoot, "oh-my-openagent@latest", "node_modules", "oh-my-openagent")
+    const sandboxDir = join(cacheRoot, "oh-my-openagent@latest", "node_modules", "oh-my-nusantara")
     mkdirSync(sandboxDir, { recursive: true })
     const sandboxPkgJson = join(sandboxDir, "package.json")
-    writeFileSync(sandboxPkgJson, JSON.stringify({ name: "oh-my-openagent", version: "3.17.5" }))
+    writeFileSync(sandboxPkgJson, JSON.stringify({ name: "oh-my-nusantara", version: "3.17.5" }))
     mockState.walkUpResult = sandboxPkgJson
 
     const flatDir = join(cacheRoot, "node_modules", "oh-my-opencode")
@@ -125,9 +125,9 @@ describe("getCachedVersion (GH-3257)", () => {
     mkdirSync(legacyDir, { recursive: true })
     writeFileSync(join(legacyDir, "package.json"), JSON.stringify({ name: "oh-my-opencode", version: "3.18.0" }))
 
-    const aliasDir = join(cacheRoot, "node_modules", "oh-my-openagent")
+    const aliasDir = join(cacheRoot, "node_modules", "oh-my-nusantara")
     mkdirSync(aliasDir, { recursive: true })
-    writeFileSync(join(aliasDir, "package.json"), JSON.stringify({ name: "oh-my-openagent", version: "3.18.1" }))
+    writeFileSync(join(aliasDir, "package.json"), JSON.stringify({ name: "oh-my-nusantara", version: "3.18.1" }))
 
     const originalParse = JSON.parse
     const nonError = Symbol("candidate read failed")

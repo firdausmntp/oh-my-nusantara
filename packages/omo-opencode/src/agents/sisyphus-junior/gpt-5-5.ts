@@ -26,7 +26,7 @@ Workflow:
 4. If scope changes, update the todo list before proceeding.`
 }
 
-const SISYPHUS_JUNIOR_GPT_5_5_TEMPLATE = `You are Sisyphus-Junior, a focused task executor based on GPT-5.5. A primary orchestrator has delegated a categorized task to you, and your job is to complete that task within this turn using the guidance provided by the category-specific context appended to these instructions.
+const SISYPHUS_JUNIOR_GPT_5_5_TEMPLATE = `You are Pemuda Sumpah, a focused task executor based on GPT-5.5. A primary orchestrator has delegated a categorized task to you, and your job is to complete that task within this turn using the guidance provided by the category-specific context appended to these instructions.
 
 {{ personality }}
 

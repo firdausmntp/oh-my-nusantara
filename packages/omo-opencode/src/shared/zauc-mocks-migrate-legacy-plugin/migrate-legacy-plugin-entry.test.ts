@@ -27,7 +27,7 @@ describe("migrateLegacyPluginEntry", () => {
 
   describe("#given opencode.json contains oh-my-opencode plugin entry", () => {
     describe("#when migrating the config", () => {
-      it("#then replaces oh-my-opencode with oh-my-openagent", async () => {
+      it("#then replaces oh-my-opencode with oh-my-nusantara", async () => {
         const configPath = join(testDir, "opencode.json")
         writeFileSync(configPath, JSON.stringify({ plugin: ["oh-my-opencode@latest"] }, null, 2))
         const { migrateLegacyPluginEntry } = await importFreshMigrationModule()
@@ -36,7 +36,7 @@ describe("migrateLegacyPluginEntry", () => {
 
         expect(result).toBe(true)
         const content = readFileSync(configPath, "utf-8")
-        expect(content).toContain("oh-my-openagent@latest")
+        expect(content).toContain("oh-my-nusantara@latest")
         expect(content).not.toContain("oh-my-opencode")
       })
     })
@@ -44,7 +44,7 @@ describe("migrateLegacyPluginEntry", () => {
 
   describe("#given opencode.json contains bare oh-my-opencode entry", () => {
     describe("#when migrating the config", () => {
-      it("#then replaces with oh-my-openagent", async () => {
+      it("#then replaces with oh-my-nusantara", async () => {
         const configPath = join(testDir, "opencode.json")
         writeFileSync(configPath, JSON.stringify({ plugin: ["oh-my-opencode"] }, null, 2))
         const { migrateLegacyPluginEntry } = await importFreshMigrationModule()
@@ -53,7 +53,7 @@ describe("migrateLegacyPluginEntry", () => {
 
         expect(result).toBe(true)
         const content = readFileSync(configPath, "utf-8")
-        expect(content).toContain('"oh-my-openagent"')
+        expect(content).toContain('"oh-my-nusantara"')
         expect(content).not.toContain("oh-my-opencode")
       })
     })
@@ -79,7 +79,7 @@ describe("migrateLegacyPluginEntry", () => {
 
           expect(result).toBe(false)
           expect(readFileSync(configPath, "utf-8")).toBe(originalContent)
-          expect(readFileSync(tempPath, "utf-8")).toContain("oh-my-openagent@latest")
+          expect(readFileSync(tempPath, "utf-8")).toContain("oh-my-nusantara@latest")
           expect(readFileSync(tempPath, "utf-8")).not.toContain("oh-my-opencode")
         } finally {
           renameSyncSpy.mockRestore()
@@ -131,16 +131,16 @@ describe("migrateLegacyPluginEntry", () => {
 
         expect(result).toBe(true)
         const content = readFileSync(configPath, "utf-8")
-        expect(content).toContain("oh-my-openagent@3.11.0")
+        expect(content).toContain("oh-my-nusantara@3.11.0")
       })
     })
   })
 
-  describe("#given opencode.json already uses oh-my-openagent", () => {
+  describe("#given opencode.json already uses oh-my-nusantara", () => {
     describe("#when checking for migration", () => {
       it("#then returns false and does not modify the file", async () => {
         const configPath = join(testDir, "opencode.json")
-        const original = JSON.stringify({ plugin: ["oh-my-openagent@latest"] }, null, 2)
+        const original = JSON.stringify({ plugin: ["oh-my-nusantara@latest"] }, null, 2)
         writeFileSync(configPath, original)
         const { migrateLegacyPluginEntry } = await importFreshMigrationModule()
 
@@ -156,14 +156,14 @@ describe("migrateLegacyPluginEntry", () => {
     describe("#when migrating the config", () => {
       it("#then removes the legacy entry instead of duplicating the canonical one", async () => {
         const configPath = join(testDir, "opencode.json")
-        writeFileSync(configPath, JSON.stringify({ plugin: ["oh-my-openagent", "oh-my-opencode"] }, null, 2))
+        writeFileSync(configPath, JSON.stringify({ plugin: ["oh-my-nusantara", "oh-my-opencode"] }, null, 2))
         const { migrateLegacyPluginEntry } = await importFreshMigrationModule()
 
         const result = migrateLegacyPluginEntry(configPath)
 
         expect(result).toBe(true)
         const saved = JSON.parse(readFileSync(configPath, "utf-8")) as { plugin: string[] }
-        expect(saved.plugin).toEqual(["oh-my-openagent"])
+        expect(saved.plugin).toEqual(["oh-my-nusantara"])
       })
     })
   })
@@ -194,7 +194,7 @@ describe("migrateLegacyPluginEntry", () => {
           notes: string
           paths: string[]
         }
-        expect(saved.plugin).toEqual(["oh-my-openagent"])
+        expect(saved.plugin).toEqual(["oh-my-nusantara"])
         expect(saved.notes).toBe("keep oh-my-opencode in this text field")
         expect(saved.paths).toEqual(["/tmp/oh-my-opencode/cache"])
       })
@@ -225,7 +225,7 @@ describe("migrateLegacyPluginEntry", () => {
     "plugin": ["oh-my-opencode"]
   }`)
         expect(content).toContain(`"plugin": [
-    "oh-my-openagent@latest"
+    "oh-my-nusantara@latest"
   ]`)
       })
     })

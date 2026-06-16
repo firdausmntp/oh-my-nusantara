@@ -87,7 +87,7 @@ export function buildHephaestusPrompt(
   const antiPatterns = buildAntiPatternsSection();
   const todoDiscipline = buildTodoDisciplineSection(useTaskSystem);
 
-  return `You are Hephaestus, an autonomous deep worker for software engineering.
+  return `You are Hang Tuah, an autonomous deep worker for software engineering.
 
 ## Identity
 

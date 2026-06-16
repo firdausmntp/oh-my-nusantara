@@ -4,7 +4,7 @@ import * as path from "path";
 import { OhMyOpenCodeConfigSchema, type OhMyOpenCodeConfig } from "../config";
 import { applyDisabledProviders } from "../shared/disabled-providers";
 import { migrateLegacyConfigFile } from "../shared/migrate-legacy-config-file";
-import { CONFIG_BASENAME, LEGACY_CONFIG_BASENAME } from "../shared/plugin-identity";
+import { CONFIG_BASENAME, LEGACY_CONFIG_BASENAMES } from "../shared/plugin-identity";
 import {
   containsPath,
   detectPluginConfigFile,
@@ -21,7 +21,7 @@ function resolveHomeDirectory(): string {
 }
 
 function resolveConfigPathAfterLegacyMigration(detectedPath: string): string {
-  if (!path.basename(detectedPath).startsWith(LEGACY_CONFIG_BASENAME)) {
+  if (!LEGACY_CONFIG_BASENAMES.some(legacy => path.basename(detectedPath).startsWith(legacy))) {
     return detectedPath;
   }
 
@@ -43,7 +43,7 @@ function getUserConfigLayers(): Array<{ readonly configDir: string; readonly con
   return userConfigDirs.map((configDir) => {
     const detected = detectPluginConfigFile(configDir, {
       basenames: [CONFIG_BASENAME],
-      legacyBasenames: [LEGACY_CONFIG_BASENAME],
+      legacyBasenames: [...LEGACY_CONFIG_BASENAMES],
     });
 
     if (detected.legacyPath) {
@@ -78,7 +78,7 @@ function getCanonicalAncestorPathsNearestFirst(directory: string): string[] {
     const opencodeDir = path.dirname(ancestorPath);
     const ancestorDetected = detectPluginConfigFile(opencodeDir, {
       basenames: [CONFIG_BASENAME],
-      legacyBasenames: [LEGACY_CONFIG_BASENAME],
+      legacyBasenames: [...LEGACY_CONFIG_BASENAMES],
     });
     if (ancestorDetected.legacyPath) {
       log("Canonical plugin config detected alongside legacy config. Remove the legacy file to avoid confusion.", {

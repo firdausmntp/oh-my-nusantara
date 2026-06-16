@@ -4,6 +4,17 @@ import type {
   AvailableSkill,
 } from "./dynamic-agent-prompt-types"
 import type { AvailableTool } from "./dynamic-agent-prompt-types"
+/**
+ * Dynamic agent core sections - builds identity and mode sections for agent prompts.
+ *
+ * This file was modified as part of the Nusantara agent naming rebrand:
+ * - Fork: oh-my-nusantara
+ * - Original: oh-my-opencode
+ * - Change: Agent identity sections now use Nusantara cultural names
+ *   (Gajah Mada, Hang Tuah, etc.) instead of Greek mythology
+ * - Date: 2026-06-15
+ */
+
 import { getToolsPromptDisplay } from "./dynamic-agent-tool-categorization"
 
 /**
