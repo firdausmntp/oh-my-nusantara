@@ -1,6 +1,7 @@
 import type { Hooks, Plugin, PluginModule } from "@opencode-ai/plugin"
 import type { HookName } from "../config"
 import { initConfigContext } from "../cli/config-manager/config-context"
+import { createV2Setup, type V2Cleanup, type V2Context } from "../v2"
 
 import { createHooks } from "../create-hooks"
 import { createManagers } from "../create-managers"
@@ -103,7 +104,14 @@ const defaultPluginModuleDeps: PluginModuleDeps = {
   createPluginInterface,
 }
 
-export function createPluginModule(overrides: Partial<PluginModuleDeps> = {}): PluginModule {
+export type DualPluginModule = PluginModule & {
+  // V2 entrypoint (OpenCode 2.x reads `id` + `setup`, ignoring `server`).
+  // The V1 `server` entrypoint stays for OpenCode 1.18.29+ hosts, which
+  // ignore the extra `setup` key.
+  setup: (ctx: V2Context) => Promise<V2Cleanup | void> | V2Cleanup | void
+}
+
+export function createPluginModule(overrides: Partial<PluginModuleDeps> = {}): DualPluginModule {
   const deps = { ...defaultPluginModuleDeps, ...overrides }
   const serverPlugin: Plugin = async (input, _options): Promise<Hooks> => {
     deps.installAgentSortShim()
@@ -243,5 +251,6 @@ export function createPluginModule(overrides: Partial<PluginModuleDeps> = {}): P
   return {
     id: PLUGIN_NAME,
     server: serverPlugin,
+    setup: createV2Setup({ serverPlugin: serverPlugin as never }),
   }
 }

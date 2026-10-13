@@ -5,6 +5,7 @@ import { parseFrontmatter } from "../../shared/frontmatter"
 type SkillFileReader = (path: string, encoding: "utf8") => string
 const SHARED_SKILL_PATHS = [
 	["..", "packages", "shared-skills", "skills"],
+	["..", "..", "packages", "shared-skills", "skills"],
 	["..", "..", "..", "..", "..", "packages", "shared-skills", "skills"],
 ] as const
 const moduleDir = typeof import.meta.dir === "string" ? import.meta.dir : dirname(fileURLToPath(import.meta.url))

@@ -30,6 +30,14 @@ const RAW_PROMPT_ALLOWLIST = new Map<string, string>([
     path.join(SOURCE_ROOT, "plugin", "unstable-agent-babysitter.ts"),
     "binds SDK Session.promptAsync into a narrow facade consumed only by gate-routed unstable-agent-babysitter dispatch; performs no direct dispatch itself",
   ],
+  [
+    path.join(SOURCE_ROOT, "v2", "client-shim.ts"),
+    "V1-to-V2 client boundary: exposes ctx.session.prompt as the V1 client's session.prompt/promptAsync surface; the V1 plugin acts as an SDK client here, not an internal injector",
+  ],
+  [
+    path.join(SOURCE_ROOT, "v2", "setup.ts"),
+    "V1-to-V2 command executor: runs harvested V1 commands by calling ctx.session.prompt (plugin-as-client); no OMO internal prompt-injection route",
+  ],
 ])
 
 async function listSourceFiles(directory: string): Promise<string[]> {

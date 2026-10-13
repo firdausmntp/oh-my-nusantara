@@ -220,7 +220,7 @@ jobs:
         run: |
           VERSION="$RAW_VERSION"
           if [ -z "$VERSION" ]; then
-            PREV=$(curl -s https://registry.npmjs.org/oh-my-opencode/latest | jq -r '.version // "0.0.0"')
+            PREV=$(curl -s https://registry.npmjs.org/oh-my-nusantara/latest | jq -r '.version // "0.0.0"')
             BASE="${PREV%%-*}"
             IFS='.' read -r MAJOR MINOR PATCH <<< "$BASE"
             case "$BUMP" in
@@ -322,14 +322,19 @@ jobs:
         env:
           VERSION: ${{ needs.release-metadata.outputs.version }}
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://registry.npmjs.org/oh-my-opencode/${VERSION}")
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://registry.npmjs.org/oh-my-nusantara/${VERSION}")
           if [ "$STATUS" = "200" ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
-            echo "✓ oh-my-opencode@${VERSION} already published"
+            echo "✓ oh-my-nusantara@${VERSION} already published"
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
 
+      # KNOWN: this fork only owns `oh-my-nusantara` on npm (maintainer josski).
+      # `oh-my-openagent` / `lazycodex-ai` remain owned by code-yeongyu, so
+      # publishing under those names returns 403. Both steps below therefore
+      # fail for this fork until either the names are claimed or the steps are
+      # disabled. TODO(owner): decide the fork's publish targets before 0.3.0.
       - name: Check if oh-my-openagent already published
         id: check-openagent
         env:
@@ -373,7 +378,7 @@ jobs:
             mv tmp.json "${package_dir}/package.json"
           done
 
-          jq --arg v "$VERSION" '.optionalDependencies = (.optionalDependencies | to_entries | map(.value = $v) | from_entries)' package.json > tmp.json && mv tmp.json package.json
+          jq --arg v "$VERSION" '.optionalDependencies = (if .optionalDependencies then (.optionalDependencies | to_entries | map(.value = $v) | from_entries) else . end)' package.json > tmp.json && mv tmp.json package.json
 
       - name: Build main package
         if: >-
@@ -436,11 +441,13 @@ jobs:
           jq --arg v "$VERSION" '
             .name = "oh-my-openagent" |
             .version = $v |
-            .optionalDependencies = (
-              .optionalDependencies | to_entries |
-              map(.key = (.key | sub("^oh-my-opencode-"; "oh-my-openagent-")) | .value = $v) |
-              from_entries
-            )
+            (if .optionalDependencies then
+              .optionalDependencies = (
+                .optionalDependencies | to_entries |
+                map(.key = (.key | sub("^oh-my-opencode-"; "oh-my-openagent-")) | .value = $v) |
+                from_entries
+              )
+            else . end)
           ' package.json > tmp.json && mv tmp.json package.json
 
           if [ -n "$DIST_TAG" ]; then
@@ -622,7 +629,7 @@ jobs:
             mv tmp.json "${package_dir}/package.json"
           done
 
-          jq --arg v "$VERSION" '.optionalDependencies = (.optionalDependencies | to_entries | map(.value = $v) | from_entries)' package.json > tmp.json && mv tmp.json package.json
+          jq --arg v "$VERSION" '.optionalDependencies = (if .optionalDependencies then (.optionalDependencies | to_entries | map(.value = $v) | from_entries) else . end)' package.json > tmp.json && mv tmp.json package.json
 
           node packages/omo-codex/plugin/scripts/sync-version.mjs
           node packages/omo-codex/plugin/scripts/sync-hook-status-messages.mjs

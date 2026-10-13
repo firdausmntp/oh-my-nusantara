@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-10-13
+
+### Added
+
+- **OpenCode 2.0 (plugin API V2) support** - the plugin now exports a dual `{id, server, setup}` module so it loads as `active` on OpenCode 2.0.x while still supporting V1 hosts
+- **V1 to V2 bridge** (`packages/omo-opencode/src/v2/`) - agents, MCPs, tools, commands, chat/system transforms and the `messages.transform` chain are projected through the V1 factory and bridged into V2 registrations
+- **Per-schema tool input conversion** - tool arguments are converted with `tool.schema.toJSONSchema` individually, so projected tools carry full typed JSON schemas instead of the named-parameter fallback
+
+### Fixed
+
+- **`publish.yml` release-blocking crashes** - the `optionalDependencies` version rewrite ran `to_entries` on `null` (the field was removed in 0.1.1), which aborted the release before any publish; the operation is now null-guarded
+- **`publish.yml` looked up the wrong registry package** - `Calculate version` and the already-published check queried `oh-my-opencode` (upstream, currently 5.1.32). `oh-my-opencode@0.3.0` exists, so the check reported `skip=true` and the fork's own package was never published. Both now query `oh-my-nusantara`
+- **Prompt route audit + dependency security test regressions** from the V2 work - the V2 client boundary is allowlisted in the prompt-async audit and the `effect` pin is updated
+
+### Changed
+
+- **Version** - 0.2.0 to 0.3.0 across the root package and `@oh-my-opencode/omo-codex`
+- **Release docs** - the stale upstream `Release: v4.8.1` banner in `AGENTS.md` now reflects the fork's own version
+
+### Known limitations
+
+- The `oh-my-openagent` and `lazycodex-ai` publish targets remain owned by `code-yeongyu`; publishing under those names fails with 403 for this fork. Owners must either claim the names or disable those steps.
+
 ## [0.2.0] - 2026-01-16
 
 ### Added

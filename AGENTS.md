@@ -4,7 +4,9 @@
 
 > **HOLD THE FUCK UP. THIS ENTIRE GODDAMN CODEBASE IS BEING RIPPED APART AND REBUILT RIGHT NOW. A MASSIVE MULTI-HARNESS AGENT OS REFACTOR IS IN PROGRESS — WE ARE RESTRUCTURING EVERYTHING TO SUPPORT MULTIPLE AGENT HARNESSES (OPENCODE, CODEX, PI, AND OTHERS). DO NOT TRUST THE STRUCTURE BELOW AS STABLE. READ THE [ROADMAP](./ROADMAP.md) BEFORE YOU TOUCH ANYTHING OR SO HELP ME GOD.**
 
-**Generated:** 2026-06-11 | **Commit:** 6bb284503 | **Branch:** dev | **Release:** v4.8.1
+**Generated:** 2026-10-13 | **Commit:** 6bb284503 | **Branch:** dev | **Release:** v0.3.0
+
+> **Version note:** this header is the fork's own release. The upstream release number (`v4.8.1` / binary packages at `4.9.2`) is stale and unrelated to `oh-my-nusantara`'s semver. Publish targets: `oh-my-nusantara` only — `oh-my-openagent` and `lazycodex-ai` remain owned by `code-yeongyu` and return 403 for this fork (see `CHANGELOG.md` "Known limitations").
 
 ## STOP. QA IS MANDATORY. NON-NEGOTIABLE. EVERY SINGLE TIME YOU TOUCH AN OPENCODE- OR CODEX-CONNECTED COMPONENT.
 

@@ -116,7 +116,7 @@ describe("dependency security", () => {
     expect(opencodePluginDependencies).toMatchObject({
       dependencies: expect.objectContaining({ effect: expect.any(String) }),
     })
-    expect(bunLock.packages?.effect?.[0]).toBe("effect@4.0.0-beta.66")
+    expect(bunLock.packages?.effect?.[0]).toBe("effect@4.0.0-rc.112")
   })
 
   it("#given first-party TypeScript sources #when dependency imports are scanned #then no source imports effect directly", async () => {
